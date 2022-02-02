@@ -6,7 +6,6 @@ La idea es tindre que anar fent differents estils de roba.
 Referencia: https://store.steampowered.com/app/239820/Game_Dev_Tycoon/
 
 
-
 Idea 2: Joc de Puzzles estil the witness
 Basicament tindre un edifici modernista industrial (fabrica feta de maons). Dins hi han certs puzles que s'han de resoldre relacionats amb el modernisme.
 
@@ -29,7 +28,7 @@ Has de resoldre puzles o alguna cosa semblant.
 
 
 Idea 7: Tipo Potion Craft
-Has d'anar creant vestints d'epoca eduardiana i al vendrels aconsegueixes diners per comprar mes plantilles per fer mes vestits.
+Has d'anar creant vestints d'epoca eduardiana i al vendrels aconsegueixes diners per comprar mes plantilles per fer mes vestits. (Eduardinos)
 
 
 Idea 8: Pedestrian de Vidrieres
@@ -40,9 +39,7 @@ Idea 9: Exploracio de la masia amb puzzles
 Estil the witness + pedestrian. Vas explorant l'edifici en 3d, pero despres has d'interatuar amb uns panells per resoldre puzzles i seguir avançant.
 
 Idea 10: Conveyor belt party
-
 Puzles amb conveyor belts.
 
 Idea 11: Vidrieres 
-
 Has de muntar les vidrieres amb els obectes que trobis per el nivell
