@@ -1,7 +1,5 @@
 
 Idea 1: Tycoon Manager
-
-
 Fabrica Textil eduardiana (busqueu a google epoca eduardiana), on has de gestionar els treballadors i els recursos per crear la roba.
 La idea es tindre que anar fent differents estils de roba.
 
@@ -9,20 +7,15 @@ Referencia: https://store.steampowered.com/app/239820/Game_Dev_Tycoon/
 
 
 
-
 Idea 2: Joc de Puzzles estil the witness
-
 Basicament tindre un edifici modernista industrial (fabrica feta de maons). Dins hi han certs puzles que s'han de resoldre relacionats amb el modernisme.
 
 
 Idea 2.2: Recorregut de puzles
-
 Zona de camp amb xemeneies (vinyes) cada xemeneia es un puzle, has d'anar resolvent els differents puzles per la zona
 
 
-
 Idea 4: Joc de Stealth
-
 Infiltrarse a una fabrica per trobar un objecte per a que l'arquitecte tingui inspiracio.
 
 
@@ -30,9 +23,19 @@ Idea 5: Joc Stealth Fabrica
 Infiltrarse a una fabrica per trobar un objecte per a que l'arquitecte tingui inspiracio. El jugador ha de resoldre alguns puzles/zones de stealth per arribar a obtenir la flor.
 
 
-
 Idea 6: Saltos en el tiempo
-
 Vas saltant entre el present i el pasat a l'epoca modernista. Es el mateix edifici amb decoracio que va canviant depenent de la epoca a la que estas.
 Has de resoldre puzles o alguna cosa semblant.
+
+
+Idea 7: Tipo Potion Craft
+Has d'anar creant vestints d'epoca eduardiana i al vendrels aconsegueixes diners per comprar mes plantilles per fer mes vestits.
+
+
+Idea 8: Pedestrian de Vidrieres
+Joc igual que el pedestrian pero de vidrieres, on has de resoldre l'orde en el que pasen les coses.
+
+
+Idea 9: Exploracio de la masia amb puzzles
+Estil the witness + pedestrian. Vas explorant l'edifici en 3d, pero despres has d'interatuar amb uns panells per resoldre puzzles i seguir avançant.
 
