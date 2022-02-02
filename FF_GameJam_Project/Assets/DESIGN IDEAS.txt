@@ -12,7 +12,7 @@ Basicament tindre un edifici modernista industrial (fabrica feta de maons). Dins
 
 
 Idea 2.2: Recorregut de puzles
-Zona de camp amb xemeneies (vinyes) cada xemeneia es un puzle, has d'anar resolvent els differents puzles per la zona
+Zona de camp amb xemeneies (vinyes) cada xemeneia es un puzle, has d'anar resolvent els differents puzles per la zona.
 
 
 Idea 4: Joc de Stealth
@@ -39,3 +39,10 @@ Joc igual que el pedestrian pero de vidrieres, on has de resoldre l'orde en el q
 Idea 9: Exploracio de la masia amb puzzles
 Estil the witness + pedestrian. Vas explorant l'edifici en 3d, pero despres has d'interatuar amb uns panells per resoldre puzzles i seguir avançant.
 
+Idea 10: Conveyor belt party
+
+Puzles amb conveyor belts.
+
+Idea 11: Vidrieres 
+
+Has de muntar les vidrieres amb els obectes que trobis per el nivell
