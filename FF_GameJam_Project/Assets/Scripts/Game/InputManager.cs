@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject freeCam;
     [SerializeField] private GameObject editorCamera;
+    [SerializeField] private GameObject roadPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,11 @@ public class InputManager : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    cellMouseIsOver.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
+                    //cellMouseIsOver.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
+                    Vector2Int pos =  Vector2Int.RoundToInt(cellMouseIsOver.GetPosition());
+                    Vector3 spawnPos = gameGrid.GetWorldPositionFromGrid(pos);
+                    GameObject road = Instantiate(roadPrefab, new Vector3(spawnPos.x , spawnPos.z, -0.5f), Quaternion.Euler(-90, 0, 0));
+                    
                 }
             }
         }
