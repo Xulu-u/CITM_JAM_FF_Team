@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5544609188221907890}
   m_Layer: 0
-  m_Name: RoadCross
+  m_Name: 15_Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
