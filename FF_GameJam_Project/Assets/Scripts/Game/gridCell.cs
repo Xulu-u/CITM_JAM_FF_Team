@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
 public class gridCell : MonoBehaviour
 {
     private int posX;
@@ -21,5 +24,4 @@ public class gridCell : MonoBehaviour
     {
         return new Vector2(posX, posY);
     }
- 
 }

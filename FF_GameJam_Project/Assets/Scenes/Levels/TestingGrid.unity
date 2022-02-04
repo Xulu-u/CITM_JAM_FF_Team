@@ -349,7 +349,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 200
+  far clip plane: 500
   field of view: 62.721996
   orthographic: 0
   orthographic size: 5
@@ -417,6 +417,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1425679715}
   freeCam: {fileID: 346498510}
   editorCamera: {fileID: 1425679713}
+  roadPrefab: {fileID: 8051439812093268023, guid: 0dba50b7881b27944b517137fd8df27c, type: 3}
 --- !u!4 &1812603383
 Transform:
   m_ObjectHideFlags: 0
@@ -460,8 +461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d294fd3be53d74d40b97f017fd15a1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 16
-  width: 16
+  height: 20
+  width: 20
   gridCellPrefab: {fileID: 6258228987996277838, guid: 1e8d4125b2bb4fa4fbfb27c475597ed5, type: 3}
 --- !u!4 &2018017162
 Transform:
