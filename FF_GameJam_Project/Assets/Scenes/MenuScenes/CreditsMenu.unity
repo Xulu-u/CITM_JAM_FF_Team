@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: info
+  m_Text: Linkedin
 --- !u!222 &19386399
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name 1
+  m_Text: Angel Gonzalez
 --- !u!222 &258994987
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name 5
+  m_Text: Xavi Marin
 --- !u!222 &268768532
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credits
+  m_Text: Designer
 --- !u!222 &349851894
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1249,7 +1249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Info
+  m_Text: Linkedin
 --- !u!222 &601875610
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1659,10 +1659,10 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name 2
+  m_Text: Sebastian Delgado
 --- !u!222 &748414529
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1741,7 +1741,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: info
+  m_Text: Linkedin
 --- !u!222 &796124073
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2282,7 +2282,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Designer
 --- !u!222 &1020681896
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2658,7 +2658,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: info
+  m_Text: Linkedin
 --- !u!222 &1156564910
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3177,7 +3177,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: designer
+  m_Text: Programmer
 --- !u!222 &1562676369
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3779,7 +3779,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: info
+  m_Text: Linkedin
 --- !u!222 &1825303006
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3894,7 +3894,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name 3
+  m_Text: Marc Ariza
 --- !u!222 &1889960411
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3973,7 +3973,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name 4
+  m_Text: Pol Bosch
 --- !u!222 &1917886225
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4297,7 +4297,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Artist
 --- !u!222 &2116290741
 CanvasRenderer:
   m_ObjectHideFlags: 0
