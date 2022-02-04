@@ -8,7 +8,7 @@ public class MainMenuScripts : MonoBehaviour
 
     public void PlayButton()
     {
-        //Change scene and start the game.
+        SceneManager.LoadScene("MainScene"); //Play Scene
     }
 
     public void SettingsButton()
@@ -19,7 +19,7 @@ public class MainMenuScripts : MonoBehaviour
 
     public void CreditsButtons()
     {
-        //Change to credits scene
+        SceneManager.LoadScene("CreditsMenu"); //Credits Scene
     }
 
     public void QuitButton()
