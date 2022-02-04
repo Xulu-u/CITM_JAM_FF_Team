@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class InputManager : MonoBehaviour
 {
     GameGrid gameGrid;
@@ -32,8 +33,14 @@ public class InputManager : MonoBehaviour
                     //cellMouseIsOver.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
                     Vector2Int pos =  Vector2Int.RoundToInt(cellMouseIsOver.GetPosition());
                     Vector3 spawnPos = gameGrid.GetWorldPositionFromGrid(pos);
-                    GameObject road = Instantiate(roadPrefab, new Vector3(spawnPos.x , spawnPos.z, -0.5f), Quaternion.Euler(-90, 0, 0));
-                    
+                    GameObject road = Instantiate(roadPrefab, new Vector3(spawnPos.x ,0.5f, spawnPos.z + 20f), Quaternion.identity);
+
+                    //turn this tile into walkable, usefull in the future to spawn roads
+                    gameGrid.SetTileWalkable(pos.x, pos.y);
+                }
+                if(Input.GetMouseButtonDown(1))
+                {
+                    cellMouseIsOver.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
                 }
             }
         }
@@ -58,7 +65,7 @@ public class InputManager : MonoBehaviour
     private gridCell IsMouseOverAGridSpace()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out RaycastHit hitInfo, 250f, whatIsAGridLayer))
+        if(Physics.Raycast(ray, out RaycastHit hitInfo, 505f, whatIsAGridLayer))
         {
             return hitInfo.transform.GetComponent<gridCell>();
         }
