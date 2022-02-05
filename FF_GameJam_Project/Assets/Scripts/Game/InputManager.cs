@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
                     //cellMouseIsOver.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
                     Vector2Int pos =  Vector2Int.RoundToInt(cellMouseIsOver.GetPosition());
                     Vector3 spawnPos = gameGrid.GetWorldPositionFromGrid(pos);
-                    GameObject road = Instantiate(roadPrefab, new Vector3(spawnPos.x ,0.5f, spawnPos.z + 20f), Quaternion.identity);
+                    GameObject road = Instantiate(roadPrefab, new Vector3(spawnPos.x ,0.5f, spawnPos.z), Quaternion.Euler(roadPrefab.transform.localEulerAngles.x, roadPrefab.transform.localEulerAngles.y, roadPrefab.transform.localEulerAngles.x));
 
                     //turn this tile into walkable, usefull in the future to spawn roads
                     gameGrid.SetTileWalkable(pos.x, pos.y);

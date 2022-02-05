@@ -7,6 +7,15 @@ enum TileType
     NON_WALKABLE,
     WALKABLE
 }
+enum TileFunctionality
+{
+    TERRAIN,
+    SPAWN_FACTORY,
+    SPAWN_BASE,
+    EMPTY,
+    BRIDGE,
+    ROAD
+}
 
 public class GameGrid : MonoBehaviour
 {
@@ -17,14 +26,20 @@ public class GameGrid : MonoBehaviour
 
     [SerializeField] private GameObject gridCellPrefab;
     [SerializeField] private GameObject originGrid;
-    private GameObject[,] gameGrid;
-    private TileType[,] walkabilityMap;
+
+    //different grids
+    private GameObject[,] gameGrid;                 //Grid that allow us to click on different gridCells 
+    private TileType[,] walkabilityMap;             //Functionality that will help us to use Pathfinding.
+    private TileFunctionality[,] entityMap;        //Read gameobject tags and adds functionality to the map so later we can use spawn etc..
+
     // Start is called before the first frame update
     void Start()
     {
         originPosition = originGrid.transform.position;
         walkabilityMap = new TileType[height, width];
+        entityMap = new TileFunctionality[height, width];
         CreateGrid();
+        CreateEntityMap();
     }
 
     // Update is called once per frame
@@ -50,8 +65,71 @@ public class GameGrid : MonoBehaviour
                 gameGrid[x, y].GetComponent<gridCell>().SetPosition(x, y);
                 gameGrid[x, y].transform.parent = transform;
                 gameGrid[x, y].gameObject.name = "Grid Space (X: " + x.ToString() + "Y: " + y.ToString() + ")";
-                
 
+                walkabilityMap[x, y] = TileType.NON_WALKABLE;
+            }
+        }
+    }
+
+    private void CreateEntityMap()
+    {
+        GameObject[] terrains;
+        terrains = GameObject.FindGameObjectsWithTag("Terrain");
+
+        foreach( GameObject tile in terrains)
+        {
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
+            if(pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
+            {
+                entityMap[pos.x, pos.y] = TileFunctionality.TERRAIN;
+            }
+        }
+
+        GameObject[] spawnFactory;
+        spawnFactory = GameObject.FindGameObjectsWithTag("SpawnFact");
+
+        foreach (GameObject tile in spawnFactory)
+        {
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
+            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
+            {
+                entityMap[pos.x, pos.y] = TileFunctionality.SPAWN_FACTORY;
+            }
+        }
+
+        GameObject[] spawnBase;
+        spawnBase = GameObject.FindGameObjectsWithTag("SpawnBase");
+
+        foreach (GameObject tile in spawnBase)
+        {
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
+            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
+            {
+                entityMap[pos.x, pos.y] = TileFunctionality.SPAWN_BASE;
+            }
+        }
+
+        GameObject[] editable;
+        editable = GameObject.FindGameObjectsWithTag("Empty");
+
+        foreach (GameObject tile in editable)
+        {
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
+            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
+            {
+                entityMap[pos.x, pos.y] = TileFunctionality.EMPTY;
+            }
+        }
+
+        GameObject[] bridges;
+        bridges = GameObject.FindGameObjectsWithTag("Bridge");
+
+        foreach (GameObject tile in bridges)
+        {
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
+            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
+            {
+                entityMap[pos.x, pos.y] = TileFunctionality.BRIDGE;
             }
         }
     }
