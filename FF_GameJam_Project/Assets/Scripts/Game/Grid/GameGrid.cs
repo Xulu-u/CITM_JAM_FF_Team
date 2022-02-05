@@ -34,6 +34,9 @@ public class GameGrid : MonoBehaviour
 
     private Tile[,] tileMap;
 
+    bool debug = false;
+    public GameObject debugPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,44 @@ public class GameGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            debug = !debug;
+        }
 
+        if (debug)
+        {
+            WeDebugginBro();
+            debug = false;
+        }
+    }
+
+    private void WeDebugginBro()
+    {   
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                Vector2Int gridPos = new Vector2Int(x, y);
+                Vector3 worldPos = GetWorldPositionFromGrid(gridPos);
+                
+                switch(entityMap[x, y])
+                {
+                    case TileFunctionality.TERRAIN:         { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.black); }    break;
+                    case TileFunctionality.SPAWN_FACTORY:   { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.magenta); }    break;
+                    case TileFunctionality.SPAWN_BASE:      { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.blue); }     break;
+                    case TileFunctionality.BRIDGE:          { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.red); }      break;
+                    case TileFunctionality.ROAD:            { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.gray); }     break;
+                    case TileFunctionality.EMPTY:           { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.green); }  break;
+                }
+            }
+        }
+    }
+
+    private void ColorDebugCube(GameObject cube, Color color)
+    {
+        cube.GetComponentInChildren<MeshRenderer>().material.color = color;
+        //clickedCell.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
     }
 
     private void CreateGrid()
@@ -77,63 +117,24 @@ public class GameGrid : MonoBehaviour
 
     private void CreateEntityMap()
     {
-        GameObject[] terrains;
-        terrains = GameObject.FindGameObjectsWithTag("Terrain");
+        FillEntityMapWithTaggedTiles("Terrain", TileFunctionality.TERRAIN);
+        FillEntityMapWithTaggedTiles("SpawnFact", TileFunctionality.SPAWN_FACTORY);
+        FillEntityMapWithTaggedTiles("SpawnBase", TileFunctionality.SPAWN_BASE);
+        FillEntityMapWithTaggedTiles("Bridge", TileFunctionality.BRIDGE);
+        FillEntityMapWithTaggedTiles("Empty", TileFunctionality.EMPTY);
+    }
 
-        foreach( GameObject tile in terrains)
-        {
-            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
+    void FillEntityMapWithTaggedTiles(string tag, TileFunctionality tileType)
+    {
+        GameObject[] tiles;
+        tiles = GameObject.FindGameObjectsWithTag(tag);
+
+        foreach (GameObject tile in tiles)
+        {   
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.position - new Vector3(20, 0, 20)/*tile.transform.TransformPoint(tile.transform.localPosition)*/);
             if(pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
             {
-                entityMap[pos.x, pos.y] = TileFunctionality.TERRAIN;
-            }
-        }
-
-        GameObject[] spawnFactory;
-        spawnFactory = GameObject.FindGameObjectsWithTag("SpawnFact");
-
-        foreach (GameObject tile in spawnFactory)
-        {
-            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
-            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
-            {
-                entityMap[pos.x, pos.y] = TileFunctionality.SPAWN_FACTORY;
-            }
-        }
-
-        GameObject[] spawnBase;
-        spawnBase = GameObject.FindGameObjectsWithTag("SpawnBase");
-
-        foreach (GameObject tile in spawnBase)
-        {
-            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
-            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
-            {
-                entityMap[pos.x, pos.y] = TileFunctionality.SPAWN_BASE;
-            }
-        }
-
-        GameObject[] editable;
-        editable = GameObject.FindGameObjectsWithTag("Empty");
-
-        foreach (GameObject tile in editable)
-        {
-            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
-            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
-            {
-                entityMap[pos.x, pos.y] = TileFunctionality.EMPTY;
-            }
-        }
-
-        GameObject[] bridges;
-        bridges = GameObject.FindGameObjectsWithTag("Bridge");
-
-        foreach (GameObject tile in bridges)
-        {
-            Vector2Int pos = GetGridPositionFromWorld(tile.transform.TransformPoint(tile.transform.localPosition));
-            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
-            {
-                entityMap[pos.x, pos.y] = TileFunctionality.BRIDGE;
+                entityMap[pos.x, pos.y] = tileType;
             }
         }
     }
@@ -180,7 +181,9 @@ public class GameGrid : MonoBehaviour
     public bool IsTileOccupied(int x, int y)
     {
         //return gameGrid[x, y].GetComponent<gridCell>().isOcupied;
-        return entityMap[x, y] != TileFunctionality.EMPTY;
+        Debug.Log("Tile Occupied By: " + entityMap[x, y]);
+
+        return (entityMap[x, y] != TileFunctionality.EMPTY);
     }
 
     public bool IsTileOccupiedByRoad(int x, int y)
