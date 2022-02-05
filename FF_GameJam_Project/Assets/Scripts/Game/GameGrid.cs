@@ -7,7 +7,7 @@ enum TileType
     NON_WALKABLE,
     WALKABLE
 }
-enum TileFunctionality
+public enum TileFunctionality
 {
     TERRAIN,
     SPAWN_FACTORY,
@@ -32,12 +32,15 @@ public class GameGrid : MonoBehaviour
     private TileType[,] walkabilityMap;             //Functionality that will help us to use Pathfinding.
     private TileFunctionality[,] entityMap;        //Read gameobject tags and adds functionality to the map so later we can use spawn etc..
 
+    private Tile[,] tileMap;
+
     // Start is called before the first frame update
     void Start()
     {
-        originPosition = originGrid.transform.position;
-        walkabilityMap = new TileType[height, width];
-        entityMap = new TileFunctionality[height, width];
+        originPosition  = originGrid.transform.position;
+        walkabilityMap  = new TileType[height, width];
+        entityMap       = new TileFunctionality[height, width];
+        tileMap         = new Tile[height, width];
         CreateGrid();
         CreateEntityMap();
     }
@@ -45,6 +48,7 @@ public class GameGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     private void CreateGrid()
@@ -151,15 +155,36 @@ public class GameGrid : MonoBehaviour
         float y = gridPos.y * gridSpaceSize;
 
         return new Vector3(x, 0, y) + originPosition;
-
     }
+
     public void SetTileWalkable(int x, int y)
     {
         walkabilityMap[x, y] = TileType.WALKABLE;
     }
 
-    public bool IsTileOcupied(int x, int y)
+    public void SetEntity(int x, int y, TileFunctionality entityType)
     {
-        return gameGrid[x, y].GetComponent<gridCell>().isOcupied;
+        entityMap[x, y] = entityType;
+    }
+
+    public Tile GetTile(int x, int y)
+    {
+        return tileMap[x, y];
+    }
+
+    public void SetTile(int x, int y, Tile newTile)
+    {
+        tileMap[x, y] = newTile;
+    }
+
+    public bool IsTileOccupied(int x, int y)
+    {
+        //return gameGrid[x, y].GetComponent<gridCell>().isOcupied;
+        return entityMap[x, y] != TileFunctionality.EMPTY;
+    }
+
+    public bool IsTileOccupiedByRoad(int x, int y)
+    {
+        return (entityMap[x, y] == TileFunctionality.ROAD || entityMap[x, y] == TileFunctionality.BRIDGE);
     }
 }

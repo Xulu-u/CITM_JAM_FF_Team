@@ -20,8 +20,8 @@ public class gridCell : MonoBehaviour
         posY = y;
     }
 
-    public Vector2 GetPosition()
+    public Vector2Int GetPosition()
     {
-        return new Vector2(posX, posY);
+        return new Vector2Int(posX, posY);
     }
 }
