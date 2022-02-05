@@ -158,9 +158,9 @@ public class GameGrid : MonoBehaviour
         return new Vector3(x, 0, y) + originPosition;
     }
 
-    public void SetTileWalkable(int x, int y)
+    public void SetTileWalkable(int x, int y, bool isWalkable = true)
     {
-        walkabilityMap[x, y] = TileType.WALKABLE;
+        walkabilityMap[x, y] = (isWalkable) ? TileType.WALKABLE : TileType.NON_WALKABLE;
     }
 
     public void SetEntity(int x, int y, TileFunctionality entityType)
@@ -181,7 +181,7 @@ public class GameGrid : MonoBehaviour
     public bool IsTileOccupied(int x, int y)
     {
         //return gameGrid[x, y].GetComponent<gridCell>().isOcupied;
-        Debug.Log("Tile Occupied By: " + entityMap[x, y]);
+        //Debug.Log("Tile Occupied By: " + entityMap[x, y]);
 
         return (entityMap[x, y] != TileFunctionality.EMPTY);
     }
