@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject freeCam;
     [SerializeField] private GameObject editorCamera;
     [SerializeField] private GameObject roadTile;
+    [SerializeField] private GameObject redGrid;
 
     Vector2Int prevHover = Vector2Int.zero;
 
@@ -87,11 +88,13 @@ public class Player : MonoBehaviour
         {
             freeCam.SetActive(true);
             editorCamera.SetActive(false);
+            redGrid.SetActive(false);
         }
         else
         {
             freeCam.SetActive(false);
             editorCamera.SetActive(true);
+            redGrid.SetActive(true);
         }
     }
 }
