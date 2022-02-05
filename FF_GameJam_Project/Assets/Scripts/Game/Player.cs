@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject roadTile;
     [SerializeField] private GameObject redGrid;
 
+    public AudioManager audioManagerScript;
+
     Vector2Int prevHover = Vector2Int.zero;
 
     // Start is called before the first frame update
@@ -75,6 +77,9 @@ public class Player : MonoBehaviour
         tile.grid = gameGrid;
         tile.cell = clickedCell;
         gameGrid.SetTile(pos.x, pos.y, tile);
+
+
+        audioManagerScript.PlayRoadBuild();
     }
 
     void DestroyRoadTile(gridCell clickedCell)
