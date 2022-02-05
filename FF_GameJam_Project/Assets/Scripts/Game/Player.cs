@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject redGrid;
 
     Vector2Int prevHover = Vector2Int.zero;
+    bool dragging = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,14 +34,21 @@ public class Player : MonoBehaviour
             gridCell hoveredCell = IsMouseOverAGridSpace();
             if (hoveredCell != null)
             {
-                if (prevHover != hoveredCell.GetPosition())
+                bool onNewCell = (prevHover != hoveredCell.GetPosition());
+                if (onNewCell)
                 {
                     Debug.Log("Mouse is hovering " + hoveredCell.GetPosition() + " cell.");
                     prevHover = hoveredCell.GetPosition();
                 }
 
-                if (Input.GetMouseButtonDown(LMB))  { InstantiateRoadTile(hoveredCell); }
-                if (Input.GetMouseButtonDown(RMB))  { DestroyRoadTile(hoveredCell); }
+                if (Input.GetMouseButtonDown(LMB))  { dragging = true; }
+                if (Input.GetMouseButtonUp(LMB))    { dragging = false; }
+                if (dragging && onNewCell)          { InstantiateRoadTile(hoveredCell); }
+
+                if (Input.GetMouseButtonDown(RMB))  
+                { 
+                    DestroyRoadTile(hoveredCell); 
+                }
             }
         }
 
