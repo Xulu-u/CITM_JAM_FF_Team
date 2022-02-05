@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public List<GameObject> states = new List<GameObject>();
+    public List<GameObject> statePrefabs = new List<GameObject>();
     
     GameObject currentState = null;
     gridCell cell           = null;
@@ -16,12 +16,12 @@ public class Tile : MonoBehaviour
         LEFT,
         UP_LEFT,
         DOWN,
-        V_ACROSS,
+        V_STRAIGHT,
         DOWN_LEFT,
         T_LEFT,
         RIGHT,
         UP_RIGHT,
-        H_ACROSS,
+        H_STRAIGHT,
         T_UP,
         DOWN_RIGHT,
         T_RIGHT,
@@ -38,13 +38,11 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void ApplyNewState()
     {
-        currentState.SetActive(false);
-
         // Check Neighbours and get id
         Vector2 cellPos = cell.GetPosition();
         int id          = 0;
@@ -53,8 +51,12 @@ public class Tile : MonoBehaviour
         //if (grid.GetCell(cellPos.x, cellPos.y - 1).IsRoad()) { id += 4; }
         //if (grid.GetCell(cellPos.x + 1, cellPos.y).IsRoad()) { id += 8; }
 
-
-        currentState = states[id];
-        currentState.SetActive(true);
+        if (id == 0)
+        {
+            return;
+        }
+        
+        Destroy(currentState);
+        currentState = Instantiate(statePrefabs[id], transform.position, Quaternion.identity);
     }
 }

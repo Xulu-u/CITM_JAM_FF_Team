@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class InputManager : MonoBehaviour
+public class Player : MonoBehaviour
 {
     GameGrid gameGrid;
 
-    [SerializeField] private LayerMask whatIsAGridLayer;
-    [SerializeField] private Camera mainCamera;
+    [SerializeField] private LayerMask  whatIsAGridLayer;
+    [SerializeField] private Camera     mainCamera;
     [SerializeField] private GameObject freeCam;
     [SerializeField] private GameObject editorCamera;
     [SerializeField] private GameObject roadPrefab;
@@ -17,7 +17,6 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         gameGrid = FindObjectOfType<GameGrid>();
-
     }
 
     // Update is called once per frame
@@ -65,6 +64,8 @@ public class InputManager : MonoBehaviour
     private gridCell IsMouseOverAGridSpace()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        
+        
         if(Physics.Raycast(ray, out RaycastHit hitInfo, 505f, whatIsAGridLayer))
         {
             return hitInfo.transform.GetComponent<gridCell>();
@@ -74,5 +75,4 @@ public class InputManager : MonoBehaviour
             return null;
         }
     }
-   
 }
