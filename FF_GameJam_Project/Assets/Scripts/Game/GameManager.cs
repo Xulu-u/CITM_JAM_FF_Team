@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct HouseBase
 {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Spawnables")]
     public List<GameObject> factoryPrefabs;
     public List<GameObject> housePrefabs;
+    public List<GameObject> factoryCanvas = new List<GameObject>();
 
     public List<Vector2Int> existingFactories = new List<Vector2Int>();
 
@@ -39,7 +41,6 @@ public class GameManager : MonoBehaviour
         gameGrid = gridGO.GetComponent<GameGrid>();
 
         currentTime = timePerRound;
-
         TutorialRound();
     }
 
@@ -54,6 +55,16 @@ public class GameManager : MonoBehaviour
             currentTime = timePerRound;
         }
 
+        foreach (GameObject obj in factoryCanvas)
+        {
+            if (obj.GetComponentInChildren<FactoryCounter>().packetTimer <= 0)
+            {
+                obj.GetComponentInChildren<FactoryCounter>().packetCount++;
+                obj.GetComponentInChildren<FactoryCounter>().packetTimer = obj.GetComponentInChildren<FactoryCounter>().packetTime;
+            }
+            obj.GetComponentInChildren<FactoryCounter>().packetTimer -= Time.deltaTime;
+            obj.GetComponentInChildren<Text>().text = obj.GetComponentInChildren<FactoryCounter>().packetCount.ToString();
+        }
     }
 
     private void TutorialRound()
@@ -106,7 +117,7 @@ public class GameManager : MonoBehaviour
                 rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
             }
             
-            Instantiate(factoryPrefabs[Random.Range(0, factoryPrefabs.Count - 1)], worldPos, rotation);
+            factoryCanvas.Add(Instantiate(factoryPrefabs[Random.Range(0, factoryPrefabs.Count - 1)], worldPos, rotation));
             
             existingFactories.Add(tilePos);
 
