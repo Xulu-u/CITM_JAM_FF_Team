@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1757173732366102451
+--- !u!1 &4734541872881670001
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 241556530232474245}
-  - component: {fileID: 8922584638289317129}
+  - component: {fileID: 6524848271778218567}
+  - component: {fileID: 2451550259366639051}
+  - component: {fileID: 8950065742308414631}
   m_Layer: 0
-  m_Name: SpotLight
+  m_Name: SpotLightLamps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &241556530232474245
+--- !u!4 &6524848271778218567
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757173732366102451}
+  m_GameObject: {fileID: 4734541872881670001}
   m_LocalRotation: {x: 0.7649214, y: 0, z: 0, w: 0.6441237}
   m_LocalPosition: {x: -0.01, y: 7.8, z: -1.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 99.8, y: 0, z: 0}
---- !u!108 &8922584638289317129
+--- !u!108 &2451550259366639051
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757173732366102451}
+  m_GameObject: {fileID: 4734541872881670001}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 0
@@ -93,3 +94,15 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &8950065742308414631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734541872881670001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74ef1d8982088498779aa199ff581d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
