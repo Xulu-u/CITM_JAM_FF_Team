@@ -134,8 +134,6 @@ public class GameGrid : MonoBehaviour
         GameObject[] tiles;
         tiles = GameObject.FindGameObjectsWithTag(tag);
 
-        Debug.Log(tag + " tiles are: " + tiles.Length);
-
         Vector3 offset = Vector3.zero;
 
         switch(tileType)
@@ -147,8 +145,6 @@ public class GameGrid : MonoBehaviour
             case TileFunctionality.ROAD:            { offset = new Vector3(10, 0, 10); } break;
             case TileFunctionality.EMPTY:           { offset = new Vector3(10, 0, 10); } break;
         }
-
-        Debug.Log(offset);
 
         foreach (GameObject tile in tiles)
         {   
@@ -215,5 +211,15 @@ public class GameGrid : MonoBehaviour
     public bool IsTileOccupiedByRoad(int x, int y)
     {
         return (entityMap[x, y] == TileFunctionality.ROAD || entityMap[x, y] == TileFunctionality.BRIDGE);
+    }
+
+    public bool IsTileOccupiedByBridge(int x, int y)
+    {
+        return (entityMap[x, y] == TileFunctionality.BRIDGE);
+    }
+
+    public bool TileExists(int x, int y)
+    {
+        return (tileMap[x, y] != null);
     }
 }
