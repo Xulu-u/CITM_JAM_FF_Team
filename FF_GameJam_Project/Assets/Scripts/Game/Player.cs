@@ -137,13 +137,22 @@ public class Player : MonoBehaviour
         {
             freeCam.SetActive(true);
             editorCamera.SetActive(false);
-            redGrid.SetActive(false);
+
+            SpriteRenderer[] sprites = redGrid.GetComponentsInChildren<SpriteRenderer>();
+            foreach(SpriteRenderer tile in sprites)
+            {
+                tile.enabled = false;
+            }
         }
         else
         {
             freeCam.SetActive(false);
             editorCamera.SetActive(true);
-            redGrid.SetActive(true);
+            SpriteRenderer[] sprites = redGrid.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer tile in sprites)
+            {
+                tile.enabled = true;
+            }
         }
     }
 }

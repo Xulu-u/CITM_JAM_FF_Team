@@ -59,8 +59,6 @@ public class House : MonoBehaviour
         {
             if (IsPathAvailable(startPoint, endPoint))
             {
-                //for(int i = 0; i < currentPath.Count - 1; ++i)
-                //{
                 Vector2Int pos = currentPath[0].getNodePosition();
                 Vector3 worldPos = grid.GetWorldPositionFromGrid(pos);
 
@@ -68,7 +66,6 @@ public class House : MonoBehaviour
                 car.GetComponent<CarBehavior>().currentPath = new List<PathNode>(currentPath);
                 car.GetComponent<CarBehavior>().nextCheckPoint = currentPath[1];
                 car.GetComponent<CarBehavior>().currentCheckPoint = currentPath[0];
-                //}
                 
             }
             currentTime = spawnTimeCar;

@@ -31,8 +31,8 @@ public class CarBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = GameObject.Find("GameGrid").GetComponent<GameGrid>();
-        game = GameObject.Find("GameManager").GetComponent<GameManager>();
+        grid = null; //GameObject.Find("GameGrid").GetComponent<GameGrid>();
+        game = null; //GameObject.Find("GameManager").GetComponent<GameManager>();
         
         //currentPath = new List<PathNode>();
         reversePath = new List<PathNode>(currentPath);
@@ -46,6 +46,16 @@ public class CarBehavior : MonoBehaviour
     //no va perque li poses el target position a la segona posicio de la llista, pero el count del forward no l'avances
     void LateUpdate()
     {
+        if(grid == null)
+        {
+           grid = GameObject.Find("GameGrid").GetComponent<GameGrid>();
+            
+        }
+        else if(game == null)
+        {
+            game = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+
         if(IsOnDestination(nextCheckPoint))
         {
             if (idFoward < currentPath.Count - 1)
