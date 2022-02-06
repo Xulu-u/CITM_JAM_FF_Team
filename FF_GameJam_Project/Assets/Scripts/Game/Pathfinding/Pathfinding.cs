@@ -17,11 +17,11 @@ public class Pathfinding
 
     public List<PathNode> FindPath(int startX, int startY, int endX, int endY)
     {
-        PathNode startNode = grid.GetGridObject(startX, startY);
-        PathNode endNode = grid.GetGridObject(endX, endY);
+        PathNode startNode  = grid.GetGridObject(startX, startY);
+        PathNode endNode    = grid.GetGridObject(endX, endY);
 
-        openList = new List<PathNode> { startNode };
-        closedList = new List<PathNode>();
+        openList    = new List<PathNode> { startNode };
+        closedList  = new List<PathNode>();
 
         for(int x = 0; x < grid.GetWidth(); ++x)
         {

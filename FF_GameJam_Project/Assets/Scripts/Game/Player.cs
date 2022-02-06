@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
     {
         if (newTile != null)
         {
-            gameGrid.SetTileWalkable(pos.x, pos.y);                                                     //turn this tile into walkable, usefull in the future to spawn roads
+            gameGrid.SetTileWalkable(pos.x, pos.y, TileType.WALKABLE);                                  //turn this tile into walkable, usefull in the future to spawn roads
             gameGrid.SetEntity(pos.x, pos.y, TileFunctionality.ROAD);
 
             Tile tile = newTile.GetComponent<Tile>();
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            gameGrid.SetTileWalkable(pos.x, pos.y, false);                                              //turn this tile into walkable, usefull in the future to spawn roads
+            gameGrid.SetTileWalkable(pos.x, pos.y, TileType.NON_WALKABLE);                              //turn this tile into walkable, usefull in the future to spawn roads
             gameGrid.SetEntity(pos.x, pos.y, TileFunctionality.EMPTY);
             gameGrid.SetTile(pos.x, pos.y, null);
 

@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum TileType
+public enum TileType
 {
     NON_WALKABLE,
-    WALKABLE
+    WALKABLE,
+    START_COAL,
+    END_COAL,
+    START_WOOL,
+    END_WOOL
 }
 public enum TileFunctionality
 {
@@ -35,11 +39,13 @@ public class GameGrid : MonoBehaviour
 
     [HideInInspector] public GridPathfinding pathGrid;
 
+    private List<Vector2Int> factoryTiles = new List<Vector2Int>();
+
     bool debug = false;
     public GameObject debugPrefab;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         originPosition  = originGrid.transform.position;
         walkabilityMap  = new TileType[height, width];
@@ -80,11 +86,11 @@ public class GameGrid : MonoBehaviour
                 switch(entityMap[x, y])
                 {
                     case TileFunctionality.TERRAIN:         { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.black); }    break;
-                    case TileFunctionality.SPAWN_FACTORY:   { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.magenta); }    break;
+                    case TileFunctionality.SPAWN_FACTORY:   { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.magenta); }  break;
                     case TileFunctionality.SPAWN_BASE:      { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.blue); }     break;
                     case TileFunctionality.BRIDGE:          { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.red); }      break;
                     case TileFunctionality.ROAD:            { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.gray); }     break;
-                    case TileFunctionality.EMPTY:           { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.green); }  break;
+                    case TileFunctionality.EMPTY:           { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.green); }    break;
                 }
             }
         }
@@ -152,6 +158,11 @@ public class GameGrid : MonoBehaviour
             if(pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
             {
                 entityMap[pos.x, pos.y] = tileType;
+
+                if (tileType == TileFunctionality.SPAWN_FACTORY)
+                {
+                    factoryTiles.Add(pos);
+                }
             }
         }
     }
@@ -175,9 +186,9 @@ public class GameGrid : MonoBehaviour
         return new Vector3(x, 0, y) + originPosition;
     }
 
-    public void SetTileWalkable(int x, int y, bool isWalkable = true)
+    public void SetTileWalkable(int x, int y, TileType type)
     {
-        walkabilityMap[x, y] = (isWalkable) ? TileType.WALKABLE : TileType.NON_WALKABLE;
+        walkabilityMap[x, y] = type;
     }
 
     public bool TileIsWalkable(int x, int y)
@@ -221,5 +232,35 @@ public class GameGrid : MonoBehaviour
     public bool TileExists(int x, int y)
     {
         return (tileMap[x, y] != null);
+    }
+
+    public Vector2Int GetRandomEmptyTile()
+    {
+        List<Vector2Int> emptyTiles = new List<Vector2Int>();
+
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                if (entityMap[x, y] == TileFunctionality.EMPTY)
+                {
+                    emptyTiles.Add(new Vector2Int(x, y));
+                }
+            }
+        }
+
+        return emptyTiles[Random.Range(0, emptyTiles.Count - 1)];
+    }
+
+    public Vector2Int GetRandomFactoryTile()
+    {
+        Vector2Int rng = factoryTiles[Random.Range(0, factoryTiles.Count - 1)];
+        factoryTiles.Remove(rng);
+
+        walkabilityMap[rng.x, rng.y] = TileType.END_COAL;
+        
+        // EXTRACT THE NEIGHBOURING FACTORY TILES.
+
+        return rng;
     }
 }
