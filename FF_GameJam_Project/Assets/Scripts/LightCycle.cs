@@ -14,7 +14,7 @@ public class LightCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lightingManager.TimeOfDay >= 6 && lightingManager.TimeOfDay <= 16)
+        if (lightingManager.TimeOfDay >= 8 && lightingManager.TimeOfDay <= 18)
         {
             gameObject.GetComponent<Light>().intensity = 0;
         }
