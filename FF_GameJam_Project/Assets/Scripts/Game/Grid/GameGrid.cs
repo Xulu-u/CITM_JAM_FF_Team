@@ -117,11 +117,11 @@ public class GameGrid : MonoBehaviour
 
     private void CreateEntityMap()
     {
-        FillEntityMapWithTaggedTiles("Terrain", TileFunctionality.TERRAIN);
+        //FillEntityMapWithTaggedTiles("Terrain", TileFunctionality.TERRAIN);
         FillEntityMapWithTaggedTiles("SpawnFact", TileFunctionality.SPAWN_FACTORY);
-        FillEntityMapWithTaggedTiles("SpawnBase", TileFunctionality.SPAWN_BASE);
-        FillEntityMapWithTaggedTiles("Bridge", TileFunctionality.BRIDGE);
-        FillEntityMapWithTaggedTiles("Empty", TileFunctionality.EMPTY);
+        //FillEntityMapWithTaggedTiles("SpawnBase", TileFunctionality.SPAWN_BASE);
+        //FillEntityMapWithTaggedTiles("Bridge", TileFunctionality.BRIDGE);
+        //FillEntityMapWithTaggedTiles("Empty", TileFunctionality.EMPTY);
     }
 
     void FillEntityMapWithTaggedTiles(string tag, TileFunctionality tileType)
@@ -129,9 +129,23 @@ public class GameGrid : MonoBehaviour
         GameObject[] tiles;
         tiles = GameObject.FindGameObjectsWithTag(tag);
 
+        Debug.Log(tag + " tiles are: " + tiles.Length);
+
+        // Vector3 offset = Vector3.zero;
+
+        // switch(tileType)
+        // {
+        //     case TileFunctionality.TERRAIN: {} break;
+        //     case TileFunctionality.TERRAIN: {} break;
+        //     case TileFunctionality.TERRAIN: {} break;
+        //     case TileFunctionality.TERRAIN: {} break;
+        //     case TileFunctionality.TERRAIN: {} break;
+        //     case TileFunctionality.TERRAIN: {} break;
+        // }
+
         foreach (GameObject tile in tiles)
         {   
-            Vector2Int pos = GetGridPositionFromWorld(tile.transform.position - new Vector3(20, 0, 20)/*tile.transform.TransformPoint(tile.transform.localPosition)*/);
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.position - new Vector3(10, 0, 10)/*tile.transform.TransformPoint(tile.transform.localPosition)*/);
             if(pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
             {
                 entityMap[pos.x, pos.y] = tileType;

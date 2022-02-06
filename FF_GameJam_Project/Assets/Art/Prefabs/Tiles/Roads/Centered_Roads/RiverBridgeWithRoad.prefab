@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7760361538287401255}
   m_Layer: 0
   m_Name: RiverBridgeWithRoad
-  m_TagString: Untagged
+  m_TagString: Bridge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,9 +82,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2943207427036552012, guid: edef77f9260986d4ba763830e0d93eb6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123373659966931862, guid: edef77f9260986d4ba763830e0d93eb6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382560097150832885, guid: edef77f9260986d4ba763830e0d93eb6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5944383633841758918, guid: edef77f9260986d4ba763830e0d93eb6, type: 3}
       propertyPath: m_Name
       value: RiverBridge Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944383633841758918, guid: edef77f9260986d4ba763830e0d93eb6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edef77f9260986d4ba763830e0d93eb6, type: 3}

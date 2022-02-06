@@ -43,20 +43,20 @@ public class Tile : MonoBehaviour
         
     }
 
-    // void OnDestroy()
-    // {
-    //     Vector2Int cellPos  = cell.GetPosition();
+    void OnDestroy()
+    {
+        Vector2Int cellPos  = cell.GetPosition();
         
-    //     Vector2Int up       = new Vector2Int(cellPos.x - 1, cellPos.y);
-    //     Vector2Int left     = new Vector2Int(cellPos.x, cellPos.y - 1);
-    //     Vector2Int down     = new Vector2Int(cellPos.x + 1, cellPos.y);
-    //     Vector2Int right    = new Vector2Int(cellPos.x, cellPos.y + 1);
+        Vector2Int up       = new Vector2Int(cellPos.x - 1, cellPos.y);
+        Vector2Int left     = new Vector2Int(cellPos.x, cellPos.y - 1);
+        Vector2Int down     = new Vector2Int(cellPos.x + 1, cellPos.y);
+        Vector2Int right    = new Vector2Int(cellPos.x, cellPos.y + 1);
 
-    //     if (grid.IsTileOccupiedByRoad(up.x, up.y))          { grid.GetTile(up.x, up.y).ReactToState(); }
-    //     if (grid.IsTileOccupiedByRoad(left.x, left.y))      { grid.GetTile(left.x, left.y).ReactToState(); }
-    //     if (grid.IsTileOccupiedByRoad(down.x, down.y))      { grid.GetTile(down.x, down.y).ReactToState(); }
-    //     if (grid.IsTileOccupiedByRoad(right.x, right.y))    { grid.GetTile(right.x, right.y).ReactToState(); }
-    // }
+        if (grid.IsTileOccupiedByRoad(up.x, up.y))          { grid.GetTile(up.x, up.y).ReactToState(); }
+        if (grid.IsTileOccupiedByRoad(left.x, left.y))      { grid.GetTile(left.x, left.y).ReactToState(); }
+        if (grid.IsTileOccupiedByRoad(down.x, down.y))      { grid.GetTile(down.x, down.y).ReactToState(); }
+        if (grid.IsTileOccupiedByRoad(right.x, right.y))    { grid.GetTile(right.x, right.y).ReactToState(); }
+    }
 
     void ApplyNewState()
     {

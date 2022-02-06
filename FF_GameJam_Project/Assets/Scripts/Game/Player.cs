@@ -92,8 +92,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        Destroy(tile.gameObject);
         UpdateGridMaps(pos, null, null);
+        Destroy(tile.gameObject);
         
         //clickedCell.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
     }
