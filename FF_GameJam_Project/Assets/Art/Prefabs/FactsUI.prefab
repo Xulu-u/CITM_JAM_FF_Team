@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9849c02c5e11aaf4ca0e5882bd5f4afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packetTime: 0
+  packetTime: 12
   packetTimer: 0
   packetCount: 0
 --- !u!1 &8609092569826202908

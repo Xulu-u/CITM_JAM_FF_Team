@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     public Camera ourCameraOrthographic;
     public Camera ourCameraPerspective;
     public Canvas GameUI;
+    public GameObject gameManager;
 
 
 
@@ -36,13 +37,12 @@ public class CameraManager : MonoBehaviour
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
 
-
     private void Start()
     {
         ourCameraOrthographic.enabled = true;
         ourCameraPerspective.enabled = false;
-
         
+
     }
 
     private void LateUpdate()
@@ -75,12 +75,22 @@ public class CameraManager : MonoBehaviour
                 ourCameraOrthographic.enabled = false;
                 ourCameraPerspective.enabled = true;
                 GameUI.worldCamera = ourCameraPerspective;
+
+                foreach (GameObject obj in gameManager.GetComponent<GameManager>().factoryCanvas)
+                {
+                    obj.GetComponentInChildren<Canvas>().worldCamera = ourCameraPerspective;
+                }
             }
             else
             {
                 ourCameraOrthographic.enabled = true;
                 ourCameraPerspective.enabled = false;
                 GameUI.worldCamera = ourCameraOrthographic;
+
+                foreach (GameObject obj in gameManager.GetComponent<GameManager>().factoryCanvas)
+                {
+                    obj.GetComponentInChildren<Canvas>().worldCamera = ourCameraOrthographic;
+                }
             }
 
         }

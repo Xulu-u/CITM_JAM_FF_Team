@@ -28,12 +28,18 @@ public class GameManager : MonoBehaviour
     public List<GameObject> factoryCanvas = new List<GameObject>();
 
     public List<Vector2Int> existingFactories = new List<Vector2Int>();
+    
+    [Header("Camera")]
+    public Camera ortographicCamera;
 
     [Header("Rounds")]
 
     [HideInInspector]
     GameGrid gameGrid;
     public int completedTravel = 0;
+
+    
+    public 
 
     void Start()
     {
@@ -57,7 +63,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject obj in factoryCanvas)
         {
-            if (obj.GetComponentInChildren<FactoryCounter>().packetTimer <= 0)
+            if (obj.GetComponentInChildren<FactoryCounter>().packetTimer <= 0.0f)
             {
                 obj.GetComponentInChildren<FactoryCounter>().packetCount++;
                 obj.GetComponentInChildren<FactoryCounter>().packetTimer = obj.GetComponentInChildren<FactoryCounter>().packetTime;
@@ -116,8 +122,10 @@ public class GameManager : MonoBehaviour
                 worldPos += new Vector3(10.0f, 0.0f, 20.0f);
                 rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
             }
-            
-            factoryCanvas.Add(Instantiate(factoryPrefabs[Random.Range(0, factoryPrefabs.Count - 1)], worldPos, rotation));
+
+            GameObject obj = Instantiate(factoryPrefabs[Random.Range(0, factoryPrefabs.Count - 1)], worldPos, rotation);
+            factoryCanvas.Add(obj);
+            obj.GetComponentInChildren<Canvas>().worldCamera = ortographicCamera;
             
             existingFactories.Add(tilePos);
 
@@ -137,8 +145,8 @@ public class GameManager : MonoBehaviour
             newHouse.path = gameGrid.path;
             newHouse.grid = gameGrid;
 
-            gameGrid.SetTileWalkable(tilePos.x, tilePos.y, TileType.START_COAL); 
-            gameGrid.SetEntity(tilePos.x, tilePos.y, TileFunctionality.SPAWN_BASE);
+            gameGrid.SetTileWalkable(tilePos.x, tilePos.y, TileType.START_COAL);
+            gameGrid.SetEntity(tilePos.x, tilePos.y, TileFunctionality.BRIDGE);
         }
     }
 }
