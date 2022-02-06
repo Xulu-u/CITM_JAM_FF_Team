@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
         Vector2Int pos = clickedCell.GetPosition();
         if (gameGrid.IsTileOccupied(pos.x, pos.y))
         {
+
+            audioManagerScript.PlayError();
             return;
         }
 

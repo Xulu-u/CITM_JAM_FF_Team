@@ -14,6 +14,7 @@ public class AudioManagerEffects : MonoBehaviour
     public AudioClip placeRoad;
     public AudioClip originDestinationSound;
     public AudioClip clickSound;
+    public AudioClip errorSound;
 
    
     public AudioSource audioSourceEffects;
@@ -36,6 +37,15 @@ public class AudioManagerEffects : MonoBehaviour
         
         audioSourceEffects.clip = placeRoad;
         audioSourceEffects.Play();
+    }
+
+    public void PlayError()
+    {
+        if (audioSourceEffects.isPlaying != true)
+        {
+            audioSourceEffects.clip = errorSound;
+            audioSourceEffects.Play();
+        }
     }
 
 }
