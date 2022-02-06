@@ -14,7 +14,7 @@ public class CarBehavior : MonoBehaviour
     private GameGrid grid;
     private GameManager game;
     [HideInInspector] public PathNode nextCheckPoint;
-    private int idFoward = 0;
+    private int idFoward = 1;
     private int idBackward = 0;
 
 
@@ -30,6 +30,10 @@ public class CarBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
+
+
+
+    //no va perque li poses el target position a la segona posicio de la llista, pero el count del forward no l'avances
     void LateUpdate()
     {
         if(IsOnDestination(nextCheckPoint))
