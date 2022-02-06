@@ -10,6 +10,7 @@ TagManager:
   - Bridge
   - Road
   - Empty
+  - FactoryPivot
   layers:
   - Default
   - TransparentFX

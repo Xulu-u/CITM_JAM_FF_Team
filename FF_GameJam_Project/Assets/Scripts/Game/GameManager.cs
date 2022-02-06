@@ -96,7 +96,8 @@ public class GameManager : MonoBehaviour
             
             existingFactories.Add(tilePos);
 
-            gameGrid.SetTileWalkable(tilePos.x, tilePos.y, TileType.END_COAL);                                                  //turn this tile into walkable, usefull in the future to spawn roads.
+            gameGrid.SetTileWalkable(tilePos.x, tilePos.y, TileType.END_COAL);
+
             // Later on for roads check if the factory's position is in the tile list or sth idk.
         }
         if (type == "House")

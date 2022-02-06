@@ -21,6 +21,42 @@ public enum TileFunctionality
     ROAD
 }
 
+struct FactoryArea
+{
+    public List<Vector2Int>    tiles;
+    public Vector2Int          entrance;
+    public bool                isHorizontal;
+
+    public void FillTiles(Vector2Int pivotPos, bool horizontal)
+    {
+        tiles = new List<Vector2Int>();
+        isHorizontal = horizontal;
+
+        if (horizontal)
+        {
+            for (int y = 0; y < 1; ++y)
+            {
+                for (int x = 0; x < 2; ++x)
+                {
+                    tiles.Add(new Vector2Int(pivotPos.x + x, pivotPos.y + y));
+                    if (x == 1 && y == 1) { entrance = tiles[tiles.Count - 1]; }
+                }
+            }
+        }
+        else
+        {
+            for (int y = 0; y < 2; ++y)
+            {
+                for (int x = 0; x < 1; ++x)
+                {
+                    tiles.Add(new Vector2Int(pivotPos.x + x, pivotPos.y + y));
+                    if (x == 0 && y == 1) { entrance = tiles[tiles.Count - 1]; }
+                }
+            }
+        }
+    }
+}
+
 public class GameGrid : MonoBehaviour
 {
     public int height;
@@ -40,7 +76,8 @@ public class GameGrid : MonoBehaviour
     [HideInInspector] public GridPathfinding pathGrid;
     [HideInInspector] public Pathfinding path;
 
-    private List<Vector2Int> factoryTiles = new List<Vector2Int>();
+    private List<Vector2Int> factoryTiles   = new List<Vector2Int>();
+    private List<FactoryArea> factoryAreas  = new List<FactoryArea>();
 
     bool debugEntityMap         = false;
     bool debugWalkabilityMap    = false;
@@ -87,8 +124,8 @@ public class GameGrid : MonoBehaviour
         {
             for (int x = 0; x < width; ++x)
             {
-                Vector2Int gridPos = new Vector2Int(x, y);
-                Vector3 worldPos = GetWorldPositionFromGrid(gridPos);
+                Vector2Int gridPos  = new Vector2Int(x, y);
+                Vector3 worldPos    = GetWorldPositionFromGrid(gridPos);
 
                 switch(entityMap[x, y])
                 {
@@ -162,6 +199,18 @@ public class GameGrid : MonoBehaviour
         FillEntityMapWithTaggedTiles("SpawnBase", TileFunctionality.SPAWN_BASE);
         FillEntityMapWithTaggedTiles("Bridge", TileFunctionality.BRIDGE);
         FillEntityMapWithTaggedTiles("Empty", TileFunctionality.EMPTY);
+
+        GameObject[] factPivots = GameObject.FindGameObjectsWithTag("FactoryPivot");
+        foreach (GameObject pivot in factPivots)
+        {
+            Vector2Int pos = GetGridPositionFromWorld(pivot.transform.position);
+            if (pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
+            {
+                FactoryArea fArea = new FactoryArea();
+                fArea.FillTiles(pos, (pivot.name == "HorizontalFactory"));
+                factoryAreas.Add(fArea);
+            }
+        }
     }
 
     void FillEntityMapWithTaggedTiles(string tag, TileFunctionality tileType)
@@ -188,14 +237,8 @@ public class GameGrid : MonoBehaviour
             {
                 entityMap[pos.x, pos.y] = tileType;
 
-                if (tileType == TileFunctionality.SPAWN_FACTORY)
-                {
-                    factoryTiles.Add(pos);
-                }
-                if (tileType == TileFunctionality.BRIDGE)
-                {
-                    walkabilityMap[pos.x, pos.y] = TileType.WALKABLE;
-                }
+                if (tileType == TileFunctionality.SPAWN_FACTORY)    { factoryTiles.Add(pos); }
+                if (tileType == TileFunctionality.BRIDGE)           { walkabilityMap[pos.x, pos.y] = TileType.WALKABLE; }
             }
         }
     }
@@ -287,8 +330,14 @@ public class GameGrid : MonoBehaviour
 
     public Vector2Int GetRandomFactoryTile()
     {
-        Vector2Int rng = factoryTiles[Random.Range(0, factoryTiles.Count - 1)];
-        factoryTiles.Remove(rng);
+        //Vector2Int rng = factoryTiles[Random.Range(0, factoryTiles.Count - 1)];
+        //factoryTiles.Remove(rng);
+
+        
+
+        FactoryArea fArea   = factoryAreas[Random.Range(0, factoryAreas.Count - 1)];
+        Vector2Int rng      = fArea.entrance;
+        factoryAreas.Remove(fArea);
 
         walkabilityMap[rng.x, rng.y] = TileType.END_COAL;
         
