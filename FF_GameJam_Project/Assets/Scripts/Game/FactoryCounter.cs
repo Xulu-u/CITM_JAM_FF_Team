@@ -18,9 +18,9 @@ public class FactoryCounter : MonoBehaviour
         {
             if (gameObject.GetComponent<Canvas>().worldCamera.name == "OrthographicCamera")
             {
-                Quaternion rot = gameObject.GetComponent<RectTransform>().rotation;
+                //Quaternion rot = gameObject.GetComponent<RectTransform>().rotation;
                 gameObject.transform.LookAt(gameObject.GetComponent<Canvas>().worldCamera.transform);
-                gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, 90, gameObject.transform.eulerAngles.z);
+                gameObject.transform.eulerAngles = new Vector3(-270, 270, gameObject.transform.eulerAngles.z);
             }
             else
                 gameObject.transform.LookAt(gameObject.GetComponent<Canvas>().worldCamera.transform);
