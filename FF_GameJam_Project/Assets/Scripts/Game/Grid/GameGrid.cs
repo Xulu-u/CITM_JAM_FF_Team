@@ -28,11 +28,12 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private GameObject originGrid;
 
     //different grids
-    private GameObject[,] gameGrid;                 //Grid that allow us to click on different gridCells 
-    private TileType[,] walkabilityMap;             //Functionality that will help us to use Pathfinding.
-    private TileFunctionality[,] entityMap;        //Read gameobject tags and adds functionality to the map so later we can use spawn etc..
+    private GameObject[,] gameGrid;                         //Grid that allow us to click on different gridCells 
+    private TileType[,] walkabilityMap;                     //Functionality that will help us to use Pathfinding.
+    private TileFunctionality[,] entityMap;                 //Read gameobject tags and adds functionality to the map so later we can use spawn etc..
+    private Tile[,] tileMap;                                //
 
-    private Tile[,] tileMap;
+    [HideInInspector] public GridPathfinding pathGrid;
 
     bool debug = false;
     public GameObject debugPrefab;
@@ -44,6 +45,10 @@ public class GameGrid : MonoBehaviour
         walkabilityMap  = new TileType[height, width];
         entityMap       = new TileFunctionality[height, width];
         tileMap         = new Tile[height, width];
+
+        pathGrid = new GridPathfinding(height, width, 20f, originPosition);
+        pathGrid.gameGrid = this;
+
         CreateGrid();
         CreateEntityMap();
     }
@@ -179,6 +184,11 @@ public class GameGrid : MonoBehaviour
         walkabilityMap[x, y] = (isWalkable) ? TileType.WALKABLE : TileType.NON_WALKABLE;
     }
 
+    public bool TileIsWalkable(int x, int y)
+    {
+        return (walkabilityMap[x, y] == TileType.WALKABLE);
+    }
+
     public void SetEntity(int x, int y, TileFunctionality entityType)
     {
         entityMap[x, y] = entityType;
@@ -205,15 +215,5 @@ public class GameGrid : MonoBehaviour
     public bool IsTileOccupiedByRoad(int x, int y)
     {
         return (entityMap[x, y] == TileFunctionality.ROAD || entityMap[x, y] == TileFunctionality.BRIDGE);
-    }
-
-    public bool IsTileOccupiedByBridge(int x, int y)
-    {
-        return (entityMap[x, y] == TileFunctionality.BRIDGE);
-    }
-
-    public bool TileExists(int x, int y)
-    {
-        return (tileMap[x, y] != null);
     }
 }
