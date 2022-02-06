@@ -117,11 +117,11 @@ public class GameGrid : MonoBehaviour
 
     private void CreateEntityMap()
     {
-        //FillEntityMapWithTaggedTiles("Terrain", TileFunctionality.TERRAIN);
+        FillEntityMapWithTaggedTiles("Terrain", TileFunctionality.TERRAIN);
         FillEntityMapWithTaggedTiles("SpawnFact", TileFunctionality.SPAWN_FACTORY);
-        //FillEntityMapWithTaggedTiles("SpawnBase", TileFunctionality.SPAWN_BASE);
-        //FillEntityMapWithTaggedTiles("Bridge", TileFunctionality.BRIDGE);
-        //FillEntityMapWithTaggedTiles("Empty", TileFunctionality.EMPTY);
+        FillEntityMapWithTaggedTiles("SpawnBase", TileFunctionality.SPAWN_BASE);
+        FillEntityMapWithTaggedTiles("Bridge", TileFunctionality.BRIDGE);
+        FillEntityMapWithTaggedTiles("Empty", TileFunctionality.EMPTY);
     }
 
     void FillEntityMapWithTaggedTiles(string tag, TileFunctionality tileType)
@@ -131,21 +131,23 @@ public class GameGrid : MonoBehaviour
 
         Debug.Log(tag + " tiles are: " + tiles.Length);
 
-        // Vector3 offset = Vector3.zero;
+        Vector3 offset = Vector3.zero;
 
-        // switch(tileType)
-        // {
-        //     case TileFunctionality.TERRAIN: {} break;
-        //     case TileFunctionality.TERRAIN: {} break;
-        //     case TileFunctionality.TERRAIN: {} break;
-        //     case TileFunctionality.TERRAIN: {} break;
-        //     case TileFunctionality.TERRAIN: {} break;
-        //     case TileFunctionality.TERRAIN: {} break;
-        // }
+        switch(tileType)
+        {
+            case TileFunctionality.TERRAIN:         { offset = new Vector3(10, 0, 10); } break;
+            case TileFunctionality.SPAWN_FACTORY:   { offset = new Vector3(10, 0, -1); } break;
+            case TileFunctionality.SPAWN_BASE:      { offset = new Vector3(10, 0, 10); } break;
+            case TileFunctionality.BRIDGE:          { offset = new Vector3(10, 0, 10); } break;
+            case TileFunctionality.ROAD:            { offset = new Vector3(10, 0, 10); } break;
+            case TileFunctionality.EMPTY:           { offset = new Vector3(10, 0, 10); } break;
+        }
+
+        Debug.Log(offset);
 
         foreach (GameObject tile in tiles)
         {   
-            Vector2Int pos = GetGridPositionFromWorld(tile.transform.position - new Vector3(10, 0, 10)/*tile.transform.TransformPoint(tile.transform.localPosition)*/);
+            Vector2Int pos = GetGridPositionFromWorld(tile.transform.position - offset);
             if(pos.x >= 0 && pos.y >= 0 && pos.x < width && pos.y < height)
             {
                 entityMap[pos.x, pos.y] = tileType;
