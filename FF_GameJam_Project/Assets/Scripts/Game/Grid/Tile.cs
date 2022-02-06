@@ -44,17 +44,18 @@ public class Tile : MonoBehaviour
     }
 
     void OnDestroy()
-    {   
+    {
         Vector2Int cellPos  = cell.GetPosition();
+        
         Vector2Int up       = new Vector2Int(cellPos.x - 1, cellPos.y);
         Vector2Int left     = new Vector2Int(cellPos.x, cellPos.y - 1);
         Vector2Int down     = new Vector2Int(cellPos.x + 1, cellPos.y);
         Vector2Int right    = new Vector2Int(cellPos.x, cellPos.y + 1);
 
-        if (TileIsEligibleToReact(up.x, up.y))          { grid.GetTile(up.x, up.y).ReactToState(); }
-        if (TileIsEligibleToReact(left.x, left.y))      { grid.GetTile(left.x, left.y).ReactToState(); }
-        if (TileIsEligibleToReact(down.x, down.y))      { grid.GetTile(down.x, down.y).ReactToState(); }
-        if (TileIsEligibleToReact(right.x, right.y))    { grid.GetTile(right.x, right.y).ReactToState(); }
+        if (grid.IsTileOccupiedByRoad(up.x, up.y))          { grid.GetTile(up.x, up.y).ReactToState(); }
+        if (grid.IsTileOccupiedByRoad(left.x, left.y))      { grid.GetTile(left.x, left.y).ReactToState(); }
+        if (grid.IsTileOccupiedByRoad(down.x, down.y))      { grid.GetTile(down.x, down.y).ReactToState(); }
+        if (grid.IsTileOccupiedByRoad(right.x, right.y))    { grid.GetTile(right.x, right.y).ReactToState(); }
     }
 
     void ApplyNewState()
@@ -68,42 +69,32 @@ public class Tile : MonoBehaviour
         Vector2Int down     = new Vector2Int(cellPos.x + 1, cellPos.y);
         Vector2Int right    = new Vector2Int(cellPos.x, cellPos.y + 1);
 
-        if (grid.IsTileOccupiedByRoad(up.x, up.y))
+        if (grid.IsTileOccupiedByRoad(up.x, up.y))                                    // UP
         { 
             id += 1; 
-            if (!grid.IsTileOccupiedByBridge(up.x, up.y))
-            {
-                grid.GetTile(up.x, up.y).ReactToState();
-            }
+            grid.GetTile(up.x, up.y).ReactToState();
         }
-        if (grid.IsTileOccupiedByRoad(left.x, left.y))
-        {
+        if (grid.IsTileOccupiedByRoad(left.x, left.y))                                    // LEFT
+        { 
             id += 2;
-            if (!grid.IsTileOccupiedByBridge(left.x, left.y))
-            {
-                grid.GetTile(left.x, left.y).ReactToState();
-            }
+            grid.GetTile(left.x, left.y).ReactToState();
         }
-        if (grid.IsTileOccupiedByRoad(down.x, down.y))
+        if (grid.IsTileOccupiedByRoad(down.x, down.y))                                    // DOWN
         { 
             id += 4;
-            if (!grid.IsTileOccupiedByBridge(down.x, down.y))
-            {
-                grid.GetTile(down.x, down.y).ReactToState();
-            }
+            grid.GetTile(down.x, down.y).ReactToState();
         }
-        if (grid.IsTileOccupiedByRoad(right.x, right.y))
+        if (grid.IsTileOccupiedByRoad(right.x, right.y))                                    // RIGHT
         { 
             id += 8;
-            if (!grid.IsTileOccupiedByBridge(right.x, right.y))
-            {
-                grid.GetTile(right.x, right.y).ReactToState();
-            }
+            grid.GetTile(right.x, right.y).ReactToState();
         }
         
         if (id == 0)
         {
-            id = 1;                                                                         // Most of the times this case will be when spawning the first road tile.
+            // There needs to be an adjacent road or have the drag control.
+            id = 1;
+            //return;
         }
 
         Destroy(currentState);
@@ -129,10 +120,5 @@ public class Tile : MonoBehaviour
 
         Destroy(currentState);
         currentState = Instantiate(statePrefabs[id], transform.position, Quaternion.Euler(statePrefabs[id].transform.localEulerAngles), transform);
-    }
-
-    bool TileIsEligibleToReact(int x, int y)
-    {
-        return (grid.TileExists(x, y) && grid.IsTileOccupiedByRoad(x, y) && !grid.IsTileOccupiedByBridge(x, y));
     }
 }

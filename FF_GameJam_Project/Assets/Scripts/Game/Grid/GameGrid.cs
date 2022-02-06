@@ -206,14 +206,4 @@ public class GameGrid : MonoBehaviour
     {
         return (entityMap[x, y] == TileFunctionality.ROAD || entityMap[x, y] == TileFunctionality.BRIDGE);
     }
-
-    public bool IsTileOccupiedByBridge(int x, int y)
-    {
-        return (entityMap[x, y] == TileFunctionality.BRIDGE);
-    }
-
-    public bool TileExists(int x, int y)
-    {
-        return (tileMap[x, y] != null);
-    }
 }
