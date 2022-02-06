@@ -41,7 +41,8 @@ public class GameGrid : MonoBehaviour
 
     private List<Vector2Int> factoryTiles = new List<Vector2Int>();
 
-    bool debug = false;
+    bool debugEntityMap         = false;
+    bool debugWalkabilityMap    = false;
     public GameObject debugPrefab;
 
     // Start is called before the first frame update
@@ -62,19 +63,22 @@ public class GameGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            debug = !debug;
-        }
+        if (Input.GetKeyDown(KeyCode.P)) { debugEntityMap = !debugEntityMap; }
+        if (Input.GetKeyDown(KeyCode.O)) { debugWalkabilityMap = !debugWalkabilityMap; }
 
-        if (debug)
+        if (debugEntityMap)
         {
-            WeDebugginBro();
-            debug = false;
+            DebugEntityMap();
+            debugEntityMap = false;
+        }
+        if (debugWalkabilityMap)
+        {
+            DebugWalkabilityMap();
+            debugWalkabilityMap = false;
         }
     }
 
-    private void WeDebugginBro()
+    private void DebugEntityMap()
     {   
         for (int y = 0; y < height; ++y)
         {
@@ -82,6 +86,28 @@ public class GameGrid : MonoBehaviour
             {
                 Vector2Int gridPos = new Vector2Int(x, y);
                 Vector3 worldPos = GetWorldPositionFromGrid(gridPos);
+
+                switch(entityMap[x, y])
+                {
+                   case TileFunctionality.TERRAIN:         { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.black); }    break;
+                   case TileFunctionality.SPAWN_FACTORY:   { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.magenta); }  break;
+                   case TileFunctionality.SPAWN_BASE:      { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.blue); }     break;
+                   case TileFunctionality.BRIDGE:          { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.red); }      break;
+                   case TileFunctionality.ROAD:            { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.gray); }     break;
+                   case TileFunctionality.EMPTY:           { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.green); }    break;
+                }
+            }
+        }
+    }
+
+    private void DebugWalkabilityMap()
+    {
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+            {
+                Vector2Int gridPos  = new Vector2Int(x, y);
+                Vector3 worldPos    = GetWorldPositionFromGrid(gridPos);
                 
                 switch (walkabilityMap[x, y])
                 {
@@ -92,18 +118,8 @@ public class GameGrid : MonoBehaviour
                     case TileType.END_COAL:     {ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.red);}        break;
                     case TileType.END_WOOL:     {ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.blue);}       break;
                 }
-
-                //switch(entityMap[x, y])
-                //{
-                //    case TileFunctionality.TERRAIN:         { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.black); }    break;
-                //    case TileFunctionality.SPAWN_FACTORY:   { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.magenta); }  break;
-                //    case TileFunctionality.SPAWN_BASE:      { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.blue); }     break;
-                //    case TileFunctionality.BRIDGE:          { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.red); }      break;
-                //    case TileFunctionality.ROAD:            { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.gray); }     break;
-                //    case TileFunctionality.EMPTY:           { ColorDebugCube(Instantiate(debugPrefab, new Vector3(worldPos.x + 10, 0.5f, worldPos.z + 10), Quaternion.identity), Color.green); }    break;
-                //}
             }
-        }
+        }        
     }
 
     private void ColorDebugCube(GameObject cube, Color color)
