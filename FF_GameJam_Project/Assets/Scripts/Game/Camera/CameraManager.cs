@@ -8,6 +8,7 @@ public class CameraManager : MonoBehaviour
 
     public Camera ourCameraOrthographic;
     public Camera ourCameraPerspective;
+    public Canvas GameUI;
 
 
 
@@ -73,11 +74,13 @@ public class CameraManager : MonoBehaviour
             {
                 ourCameraOrthographic.enabled = false;
                 ourCameraPerspective.enabled = true;
+                GameUI.worldCamera = ourCameraPerspective;
             }
             else
             {
                 ourCameraOrthographic.enabled = true;
                 ourCameraPerspective.enabled = false;
+                GameUI.worldCamera = ourCameraOrthographic;
             }
 
         }
