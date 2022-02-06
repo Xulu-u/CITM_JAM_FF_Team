@@ -9,8 +9,10 @@ public class Player : MonoBehaviour
     gridCell hoveredCell    = null;
 
     Vector2Int prevHover    = Vector2Int.zero;
-    bool dragging           = false;
-    bool firstTile          = false;
+    bool draggingLeft       = false;
+    bool firstTileLeft      = false;
+    bool draggingRight      = false;
+    bool firstTileRight     = false;
 
     private int LMB = 0;                                                                                // Left Mouse Button
     private int RMB = 1;                                                                                // Right Mouse Button
@@ -46,14 +48,13 @@ public class Player : MonoBehaviour
                     prevHover = hoveredCell.GetPosition();
                 }
 
-                if (Input.GetMouseButtonDown(LMB))          { dragging = true; firstTile = true; }
-                if (Input.GetMouseButtonUp(LMB))            { dragging = false; }
-                if (dragging && (onNewCell || firstTile))   { CreateRoadTile(hoveredCell); firstTile = false; }
+                if (Input.GetMouseButtonDown(LMB))                  { draggingLeft = true; firstTileLeft = true; }
+                if (Input.GetMouseButtonUp(LMB))                    { draggingLeft = false; }
+                if (draggingLeft && (onNewCell || firstTileLeft))   { CreateRoadTile(hoveredCell); firstTileLeft = false; }
 
-                if (Input.GetMouseButtonDown(RMB))  
-                { 
-                    //DestroyRoadTile(hoveredCell); 
-                }
+                if (Input.GetMouseButtonDown(RMB))                  { draggingRight = true; firstTileRight = true; }
+                if (Input.GetMouseButtonUp(RMB))                    { draggingRight = false; }
+                if (draggingRight && (onNewCell || firstTileRight)) { DestroyRoadTile(hoveredCell); firstTileRight = false; }
             }
         }
 
@@ -72,7 +73,6 @@ public class Player : MonoBehaviour
     void CreateRoadTile(gridCell clickedCell)
     {   
         Vector2Int pos = clickedCell.GetPosition();
-        //if (gameGrid.IsTileOccupiedByRoad(pos.x, pos.y))                                            // Change this to gameGrid.IsOccupied() when it works.
         if (gameGrid.IsTileOccupied(pos.x, pos.y))
         {
             return;
@@ -80,31 +80,22 @@ public class Player : MonoBehaviour
 
         GameObject newTile = InstantiateRoadTile(pos);
         UpdateGridMaps(pos, clickedCell, newTile);
-
-        // if (roadOrigin)
-        // {
-        //     Vector2Int prevPos      = prevHoveredCell.GetPosition();
-        //     if (gameGrid.IsTileOccupiedByRoad(prevPos.x, prevPos.y))                              // Change this to gameGrid.IsOccupied() when it works.
-        //     {
-        //         return;
-        //     }
-
-        //     GameObject originTile   = InstantiateRoadTile(prevPos);
-        //     UpdateGridMaps(prevPos, clickedCell, originTile);
-        //     roadOrigin = false;
-        // }
     }
 
     void DestroyRoadTile(gridCell clickedCell)
     {
         Vector2Int pos = clickedCell.GetPosition();
         Tile tile = gameGrid.GetTile(pos.x, pos.y);
-        if (tile != null)
+        if (tile == null)
         {
-            //Destroy(tile.gameObject.parent);
+            Debug.Log("CANNOT DESTROY A TILE THAT DOES NOT EXIST");
+            return;
         }
+
+        Destroy(tile.gameObject);
+        UpdateGridMaps(pos, null, null);
         
-        clickedCell.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
+        //clickedCell.GetComponentInChildren<SpriteRenderer>().material.color = Color.black;
     }
 
     GameObject InstantiateRoadTile(Vector2Int pos)
@@ -115,15 +106,26 @@ public class Player : MonoBehaviour
 
     void UpdateGridMaps(Vector2Int pos, gridCell cell, GameObject newTile)
     {
-        gameGrid.SetTileWalkable(pos.x, pos.y);                                                   //turn this tile into walkable, usefull in the future to spawn roads
-        gameGrid.SetEntity(pos.x, pos.y, TileFunctionality.ROAD);
+        if (newTile != null)
+        {
+            gameGrid.SetTileWalkable(pos.x, pos.y);                                                     //turn this tile into walkable, usefull in the future to spawn roads
+            gameGrid.SetEntity(pos.x, pos.y, TileFunctionality.ROAD);
 
-        Tile tile = newTile.GetComponent<Tile>();
-        tile.grid = gameGrid;
-        tile.cell = cell;
-        gameGrid.SetTile(pos.x, pos.y, tile);
+            Tile tile = newTile.GetComponent<Tile>();
+            tile.grid = gameGrid;
+            tile.cell = cell;
+            gameGrid.SetTile(pos.x, pos.y, tile);
 
-        audioManagerScript.PlayRoadBuild();
+            audioManagerScript.PlayRoadBuild();
+        }
+        else
+        {
+            gameGrid.SetTileWalkable(pos.x, pos.y, false);                                              //turn this tile into walkable, usefull in the future to spawn roads
+            gameGrid.SetEntity(pos.x, pos.y, TileFunctionality.EMPTY);
+            gameGrid.SetTile(pos.x, pos.y, null);
+
+            audioManagerScript.PlayRoadBuild();                                                         // Put audioManagerScript.PlayRoadDestroy();
+        }
     }
 
     void ToggleFreeCam()
