@@ -79,7 +79,7 @@ public class CarBehavior : MonoBehaviour
     {
 
         offset = GetOffsetFromDirection();
-        Debug.Log("Offset ->" + offset + "direction: " + currentDir);
+        //Debug.Log("Offset ->" + offset + "direction: " + currentDir);
         Vector3 carPosition = transform.position;
         Vector3 targetPosition = grid.GetWorldPositionFromGrid(nextCheckPoint.getNodePosition()) + offset;
 
@@ -100,7 +100,7 @@ public class CarBehavior : MonoBehaviour
     public bool IsOnDestination(PathNode nextPoint)
     {
         offset = GetOffsetFromDirection();
-        Debug.Log("Offset CheckDestination ->" + offset + "direction: " + currentDir);
+        //Debug.Log("Offset CheckDestination ->" + offset + "direction: " + currentDir);
         Vector2Int pos = nextPoint.getNodePosition();
         Vector3 destination = grid.GetWorldPositionFromGrid(pos) + offset;
 

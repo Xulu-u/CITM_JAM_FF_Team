@@ -19,8 +19,11 @@ public class House : MonoBehaviour
     public Vector2Int       endPoint;
     public GameGrid         grid;
     private HouseType       type;
-
+    private List<Vector2Int> factories;
     bool once = false;
+
+    public float spawnTimeCar = 10.0f;
+    private float currentTime;
 
     public House(Vector3 position, HouseType type)
     {
@@ -32,32 +35,44 @@ public class House : MonoBehaviour
 
     public bool IsPathAvailable(Vector2Int start, Vector2Int end)
     {
-        currentPath = path.FindPath(start.x, start.y, end.x, end.y);
+        factories = GameObject.Find("GameManager").GetComponent<GameManager>().existingFactories;
+
+        foreach(Vector2Int fact in factories)
+        {
+            currentPath = path.FindPath(start.x, start.y, fact.x, fact.y);
+            if (currentPath != null)
+                break;
+        }
         return (currentPath != null);
     }
 
     private void Start()
     {
-     
-
+        currentTime = spawnTimeCar;
     }
 
     private void Update()
     {
+        currentTime -= Time.deltaTime;
         //Debuging Path:
-        if(IsPathAvailable(startPoint, endPoint) && once == false)
+        if(currentTime <= 0.0f)
         {
-            //for(int i = 0; i < currentPath.Count - 1; ++i)
-            //{
-            Vector2Int pos = currentPath[0].getNodePosition();
-            Vector3 worldPos = grid.GetWorldPositionFromGrid(pos);
-            
-            GameObject car = Instantiate(carPrefab, new Vector3(worldPos.x, 0.5f, worldPos.z ), Quaternion.Euler(0,180,0));
-            car.GetComponent<CarBehavior>().currentPath = new List<PathNode>(currentPath);
-            car.GetComponent<CarBehavior>().nextCheckPoint = currentPath[1];
-            car.GetComponent<CarBehavior>().currentCheckPoint = currentPath[0];
-        //}
-            once = true;
+            if (IsPathAvailable(startPoint, endPoint))
+            {
+                //for(int i = 0; i < currentPath.Count - 1; ++i)
+                //{
+                Vector2Int pos = currentPath[0].getNodePosition();
+                Vector3 worldPos = grid.GetWorldPositionFromGrid(pos);
+
+                GameObject car = Instantiate(carPrefab, new Vector3(worldPos.x, 0.5f, worldPos.z), Quaternion.Euler(0, 180, 0));
+                car.GetComponent<CarBehavior>().currentPath = new List<PathNode>(currentPath);
+                car.GetComponent<CarBehavior>().nextCheckPoint = currentPath[1];
+                car.GetComponent<CarBehavior>().currentCheckPoint = currentPath[0];
+                //}
+                
+            }
+            currentTime = spawnTimeCar;
         }
+        
     }
 }

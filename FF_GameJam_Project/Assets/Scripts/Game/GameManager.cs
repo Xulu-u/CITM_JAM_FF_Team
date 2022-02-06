@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnFactories()
     {
-
+        SpawnOnAvailableTile("Factory");
     }
 
     private void SpawnHouse()

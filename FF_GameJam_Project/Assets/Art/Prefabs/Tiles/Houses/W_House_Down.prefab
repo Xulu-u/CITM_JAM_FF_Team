@@ -49,6 +49,7 @@ MonoBehaviour:
   startPoint: {x: 0, y: 0}
   endPoint: {x: 0, y: 0}
   grid: {fileID: 0}
+  spawnTimeCar: 10
 --- !u!1 &2911648523902187208
 GameObject:
   m_ObjectHideFlags: 0
