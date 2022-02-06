@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 public class AudioManagerMusic : MonoBehaviour
 {
 
-
-  
    public AudioMixer mixer;
 
 
@@ -18,7 +16,6 @@ public class AudioManagerMusic : MonoBehaviour
     string musicVolume = "VolumeMusic";
 
 
-    
     public AudioClip gameplayMusic;
     public AudioClip menuMusic;
 
@@ -29,7 +26,6 @@ public class AudioManagerMusic : MonoBehaviour
     private void Start()
     {
        
-
         if (SceneManager.GetActiveScene().name.ToString() == "MainScene")
         {
             audioSourceMusic.clip = gameplayMusic;

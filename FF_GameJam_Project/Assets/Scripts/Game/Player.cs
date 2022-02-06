@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
 
     void UpdateGridMaps(Vector2Int pos, gridCell cell, GameObject newTile)
     {
+
         if (newTile != null)
         {
             gameGrid.SetTileWalkable(pos.x, pos.y);                                                     //turn this tile into walkable, usefull in the future to spawn roads
