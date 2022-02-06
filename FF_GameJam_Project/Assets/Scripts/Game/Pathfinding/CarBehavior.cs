@@ -9,10 +9,11 @@ public class CarBehavior : MonoBehaviour
 
     [Header("Car Behavior values")]
     public float moveSpeed;
+    public float rotationSpeed = 10f;
 
     private GameGrid grid;
     private GameManager game;
-    private PathNode nextCheckPoint;
+    [HideInInspector] public PathNode nextCheckPoint;
     private int idFoward = 0;
     private int idBackward = 0;
 
@@ -22,34 +23,48 @@ public class CarBehavior : MonoBehaviour
     {
         grid = GameObject.Find("GameGrid").GetComponent<GameGrid>();
         game = GameObject.Find("GameManager").GetComponent<GameManager>();
-        currentPath = reversePath;
+        
+        //currentPath = new List<PathNode>();
+        reversePath = new List<PathNode>(currentPath);
         reversePath.Reverse();
-        nextCheckPoint = currentPath[1];
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if(IsOnDestination(nextCheckPoint))
         {
             if (idFoward < currentPath.Count - 1)
+            {
                 nextCheckPoint = currentPath[idFoward++];
+                Vector2Int debug = nextCheckPoint.getNodePosition();
+                Vector3 AAA = grid.GetWorldPositionFromGrid(debug);
+                Debug.Log("Tile ->" + nextCheckPoint.ToString());
+                Debug.Log("World Pos -> X: " + AAA.x + "Z: " + AAA.z);
+            }
             else if (idBackward < reversePath.Count - 1)
                 nextCheckPoint = reversePath[idBackward++];
             else
             {
                 game.completedTravel++;
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
+
         MoveCar();
     }
 
     private void MoveCar()
     {
-        Vector3 direction = this.transform.position - grid.GetWorldPositionFromGrid(nextCheckPoint.getNodePosition());
-        Vector3 newPosition = direction * (moveSpeed * Time.deltaTime);
-        transform.position += newPosition;
+        Vector3 carPosition = transform.position;
+        Vector3 targetPosition = grid.GetWorldPositionFromGrid(nextCheckPoint.getNodePosition());
+
+        Quaternion rotation = Quaternion.LookRotation(targetPosition);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation,5000f);
+        
+        transform.position = Vector3.MoveTowards(carPosition, Vector3.Lerp(carPosition, targetPosition, 0.05f), moveSpeed);
+        
+        //transform.position += newPosition;
     }
 
     public bool IsOnDestination(PathNode nextPoint)

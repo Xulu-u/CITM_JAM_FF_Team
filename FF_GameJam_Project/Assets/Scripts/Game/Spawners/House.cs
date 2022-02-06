@@ -49,12 +49,13 @@ public class House : MonoBehaviour
         {
             //for(int i = 0; i < currentPath.Count - 1; ++i)
             //{
-                Vector2Int pos = currentPath[0].getNodePosition();
-                Vector3 worldPos = grid.GetWorldPositionFromGrid(pos);
-               
-                GameObject car = Instantiate(carPrefab, new Vector3(worldPos.x + 10f, 0.5f, worldPos.z + 10f), Quaternion.identity);
-                car.GetComponent<CarBehavior>().reversePath = currentPath;
-            //}
+            Vector2Int pos = currentPath[0].getNodePosition();
+            Vector3 worldPos = grid.GetWorldPositionFromGrid(pos);
+            
+            GameObject car = Instantiate(carPrefab, new Vector3(worldPos.x, 0.5f, worldPos.z ), Quaternion.Euler(0,180,0));
+            car.GetComponent<CarBehavior>().currentPath = new List<PathNode>(currentPath);
+            car.GetComponent<CarBehavior>().nextCheckPoint = currentPath[1];
+        //}
             once = true;
         }
     }
