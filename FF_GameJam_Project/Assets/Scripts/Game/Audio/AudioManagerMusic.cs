@@ -34,6 +34,7 @@ public class AudioManagerMusic : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name.ToString() == "MainMenu")
         {
+            DontDestroyOnLoad(GameObject.Find("AudioManager"));
             audioSourceMusic.clip = menuMusic;
             audioSourceMusic.Play();
 

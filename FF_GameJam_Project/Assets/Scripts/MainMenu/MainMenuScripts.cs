@@ -8,6 +8,14 @@ public class MainMenuScripts : MonoBehaviour
 
     public void PlayButton()
     {
+       GameObject obj= GameObject.Find("AudioManager");
+
+        
+        Destroy(GameObject.Find("AudioManager"));
+
+
+
+
         SceneManager.LoadScene("MainScene"); //Play Scene
     }
 
