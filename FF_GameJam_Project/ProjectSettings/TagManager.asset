@@ -11,6 +11,7 @@ TagManager:
   - Road
   - Empty
   - FactoryPivot
+  - Car
   layers:
   - Default
   - TransparentFX

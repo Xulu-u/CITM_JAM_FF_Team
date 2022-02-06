@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public struct HouseBase
 {
@@ -70,6 +71,16 @@ public class GameManager : MonoBehaviour
             }
             obj.GetComponentInChildren<FactoryCounter>().packetTimer -= Time.deltaTime;
             obj.GetComponentInChildren<Text>().text = obj.GetComponentInChildren<FactoryCounter>().packetCount.ToString();
+
+            if(obj.GetComponentInChildren<FactoryCounter>().packetCount >= 8)
+            {
+                SceneManager.LoadScene("Lose");
+            }
+        }
+
+        if (factoryCanvas.Count >= 14)
+        {
+            SceneManager.LoadScene("Win");
         }
     }
 

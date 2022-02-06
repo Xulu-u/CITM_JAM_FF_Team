@@ -7,6 +7,7 @@ public class FactoryCounter : MonoBehaviour
     public float packetTime;
     public float packetTimer;
     public int   packetCount = 0;
+    public Collider collider;
 
     private void Start()
     {
@@ -26,4 +27,11 @@ public class FactoryCounter : MonoBehaviour
                 gameObject.transform.LookAt(gameObject.GetComponent<Canvas>().worldCamera.transform);
         }
     }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Car")
+    //    {
+    //        packetCount--;
+    //    }
+    //}
 }
