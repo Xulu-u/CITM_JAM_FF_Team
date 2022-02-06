@@ -10,6 +10,8 @@ public class GridPathfinding
     private Vector3 originPosition;
     public PathNode[,] pathGrid;
 
+    [HideInInspector] public GameGrid gameGrid;
+
     public GridPathfinding(int height, int width, float gridSize, Vector3 originPosition)
     {
         this.height = height;

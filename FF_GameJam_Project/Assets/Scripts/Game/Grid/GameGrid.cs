@@ -28,11 +28,12 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private GameObject originGrid;
 
     //different grids
-    private GameObject[,] gameGrid;                 //Grid that allow us to click on different gridCells 
-    private TileType[,] walkabilityMap;             //Functionality that will help us to use Pathfinding.
-    private TileFunctionality[,] entityMap;        //Read gameobject tags and adds functionality to the map so later we can use spawn etc..
+    private GameObject[,] gameGrid;                         //Grid that allow us to click on different gridCells 
+    private TileType[,] walkabilityMap;                     //Functionality that will help us to use Pathfinding.
+    private TileFunctionality[,] entityMap;                 //Read gameobject tags and adds functionality to the map so later we can use spawn etc..
+    private Tile[,] tileMap;                                //
 
-    private Tile[,] tileMap;
+    [HideInInspector] public GridPathfinding pathGrid;
 
     bool debug = false;
     public GameObject debugPrefab;
@@ -44,6 +45,10 @@ public class GameGrid : MonoBehaviour
         walkabilityMap  = new TileType[height, width];
         entityMap       = new TileFunctionality[height, width];
         tileMap         = new Tile[height, width];
+
+        pathGrid = new GridPathfinding(height, width, 20f, originPosition);
+        pathGrid.gameGrid = this;
+
         CreateGrid();
         CreateEntityMap();
     }
@@ -129,8 +134,6 @@ public class GameGrid : MonoBehaviour
         GameObject[] tiles;
         tiles = GameObject.FindGameObjectsWithTag(tag);
 
-        Debug.Log(tag + " tiles are: " + tiles.Length);
-
         Vector3 offset = Vector3.zero;
 
         switch(tileType)
@@ -142,8 +145,6 @@ public class GameGrid : MonoBehaviour
             case TileFunctionality.ROAD:            { offset = new Vector3(10, 0, 10); } break;
             case TileFunctionality.EMPTY:           { offset = new Vector3(10, 0, 10); } break;
         }
-
-        Debug.Log(offset);
 
         foreach (GameObject tile in tiles)
         {   
@@ -177,6 +178,11 @@ public class GameGrid : MonoBehaviour
     public void SetTileWalkable(int x, int y, bool isWalkable = true)
     {
         walkabilityMap[x, y] = (isWalkable) ? TileType.WALKABLE : TileType.NON_WALKABLE;
+    }
+
+    public bool TileIsWalkable(int x, int y)
+    {
+        return (walkabilityMap[x, y] == TileType.WALKABLE);
     }
 
     public void SetEntity(int x, int y, TileFunctionality entityType)
