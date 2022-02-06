@@ -59,11 +59,17 @@ public class CarBehavior : MonoBehaviour
         Vector3 carPosition = transform.position;
         Vector3 targetPosition = grid.GetWorldPositionFromGrid(nextCheckPoint.getNodePosition());
 
-        Quaternion rotation = Quaternion.LookRotation(targetPosition);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation,5000f);
-        
+
+
+        transform.LookAt(targetPosition);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y+180, transform.eulerAngles.z);
+      
+
+
         transform.position = Vector3.MoveTowards(carPosition, Vector3.Lerp(carPosition, targetPosition, 0.05f), moveSpeed);
         
+
+
         //transform.position += newPosition;
     }
 
