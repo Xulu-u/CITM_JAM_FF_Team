@@ -55,6 +55,7 @@ public class House : MonoBehaviour
             GameObject car = Instantiate(carPrefab, new Vector3(worldPos.x, 0.5f, worldPos.z ), Quaternion.Euler(0,180,0));
             car.GetComponent<CarBehavior>().currentPath = new List<PathNode>(currentPath);
             car.GetComponent<CarBehavior>().nextCheckPoint = currentPath[1];
+            car.GetComponent<CarBehavior>().currentCheckPoint = currentPath[0];
         //}
             once = true;
         }
