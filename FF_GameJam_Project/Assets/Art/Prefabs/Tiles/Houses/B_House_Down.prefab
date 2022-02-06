@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98df1b53c770fe5439a8b9bffda30e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carPrefab: {fileID: 100008, guid: 2038419e3849204428901f81d2af618b, type: 3}
+  carPrefab: {fileID: 5026346187658348442, guid: 0f14f1828a72d7f4ab83743cf808e474, type: 3}
   startPoint: {x: 0, y: 0}
   endPoint: {x: 0, y: 0}
   grid: {fileID: 0}

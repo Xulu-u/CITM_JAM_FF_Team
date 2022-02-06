@@ -47,12 +47,14 @@ public class House : MonoBehaviour
         //Debuging Path:
         if(IsPathAvailable(startPoint, endPoint) && once == false)
         {
-            for(int i = 0; i < currentPath.Count - 1; ++i)
-            {
-                Vector2Int pos = currentPath[i].getNodePosition();
+            //for(int i = 0; i < currentPath.Count - 1; ++i)
+            //{
+                Vector2Int pos = currentPath[0].getNodePosition();
                 Vector3 worldPos = grid.GetWorldPositionFromGrid(pos);
-                Instantiate(carPrefab, new Vector3(worldPos.x + 10f, 0.5f, worldPos.z + 10f), Quaternion.identity);
-            }
+               
+                GameObject car = Instantiate(carPrefab, new Vector3(worldPos.x + 10f, 0.5f, worldPos.z + 10f), Quaternion.identity);
+                car.GetComponent<CarBehavior>().reversePath = currentPath;
+            //}
             once = true;
         }
     }
