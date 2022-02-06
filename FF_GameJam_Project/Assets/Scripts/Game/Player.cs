@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject redGrid;
 
     public AudioManagerEffects audioManagerScript;
+    public PauseMenu pauseScript;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(editorCamera.active == true)
+        if(editorCamera.active == true  && pauseScript.IsPaused==false)
         {
             hoveredCell = IsMouseOverAGridSpace();
             if (hoveredCell != null)

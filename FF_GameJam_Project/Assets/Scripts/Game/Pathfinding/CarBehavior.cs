@@ -65,7 +65,14 @@ public class CarBehavior : MonoBehaviour
             }
         }
 
-        MoveCar();
+        if (Time.timeScale == 0)
+        {
+            
+        }
+        else
+        {
+            MoveCar();
+        }
     }
 
     private void MoveCar()
