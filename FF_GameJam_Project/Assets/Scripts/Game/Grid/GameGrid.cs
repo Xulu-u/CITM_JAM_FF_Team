@@ -38,6 +38,7 @@ public class GameGrid : MonoBehaviour
     private Tile[,] tileMap;                                //
 
     [HideInInspector] public GridPathfinding pathGrid;
+    [HideInInspector] public Pathfinding path;
 
     private List<Vector2Int> factoryTiles = new List<Vector2Int>();
 
@@ -53,8 +54,10 @@ public class GameGrid : MonoBehaviour
         entityMap       = new TileFunctionality[height, width];
         tileMap         = new Tile[height, width];
 
-        pathGrid = new GridPathfinding(height, width, 20f, originPosition);
-        pathGrid.gameGrid = this;
+        path = new Pathfinding(width, height);
+        pathGrid = path.GetGrid();
+        //pathGrid = new GridPathfinding(height, width, 20f, originPosition);
+        //pathGrid.gameGrid = this;
 
         CreateGrid();
         CreateEntityMap();
@@ -223,7 +226,7 @@ public class GameGrid : MonoBehaviour
 
     public bool TileIsWalkable(int x, int y)
     {
-        return (walkabilityMap[x, y] == TileType.WALKABLE);
+        return (walkabilityMap[x, y] == TileType.NON_WALKABLE);
     }
 
     public void SetEntity(int x, int y, TileFunctionality entityType)

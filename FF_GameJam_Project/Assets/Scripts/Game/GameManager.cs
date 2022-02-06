@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
 
             newHouse.startPoint = tilePos;
             newHouse.endPoint = existingFactories[existingFactories.Count - 1];
-            newHouse.path = new Pathfinding(gameGrid.width, gameGrid.height);
+            newHouse.path = gameGrid.path;
             newHouse.grid = gameGrid;
 
             gameGrid.SetTileWalkable(tilePos.x, tilePos.y, TileType.START_COAL); 
