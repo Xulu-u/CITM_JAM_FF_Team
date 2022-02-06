@@ -20,6 +20,8 @@ public class House : MonoBehaviour
     public GameGrid         grid;
     private HouseType       type;
 
+    bool once = false;
+
     public House(Vector3 position, HouseType type)
     {
         this.position       = position;
@@ -43,13 +45,15 @@ public class House : MonoBehaviour
     private void Update()
     {
         //Debuging Path:
-        if(IsPathAvailable(startPoint, endPoint))
+        if(IsPathAvailable(startPoint, endPoint) && once == false)
         {
             for(int i = 0; i < currentPath.Count - 1; ++i)
             {
                 Vector2Int pos = currentPath[i].getNodePosition();
-                Instantiate(carPrefab, grid.GetWorldPositionFromGrid(pos), Quaternion.identity);
+                Vector3 worldPos = grid.GetWorldPositionFromGrid(pos);
+                Instantiate(carPrefab, new Vector3(worldPos.x + 10f, 0.5f, worldPos.z + 10f), Quaternion.identity);
             }
+            once = true;
         }
     }
 }

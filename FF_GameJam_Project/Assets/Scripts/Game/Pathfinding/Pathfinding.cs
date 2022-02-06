@@ -54,7 +54,7 @@ public class Pathfinding
             {
                 if (closedList.Contains(neighbourNode)) continue;
                 
-                if(!grid.gameGrid.TileIsWalkable(neighbourNode.getNodePosition().x, neighbourNode.getNodePosition().y))
+                if(grid.gameGrid.TileIsWalkable(neighbourNode.getNodePosition().x, neighbourNode.getNodePosition().y))
                 {
                     closedList.Add(neighbourNode);
                     continue;
@@ -144,5 +144,10 @@ public class Pathfinding
     public PathNode GetNode(int x, int y)
     {
         return grid.GetGridObject(x,y);
+    }
+
+    public GridPathfinding GetGrid()
+    {
+        return grid;
     }
 }
