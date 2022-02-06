@@ -1019,7 +1019,7 @@ GameObject:
   - component: {fileID: 492525157}
   - component: {fileID: 492525160}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: Travels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1522,7 +1522,7 @@ GameObject:
   - component: {fileID: 888596079}
   - component: {fileID: 888596080}
   m_Layer: 5
-  m_Name: ExitButton (1)
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1862,7 +1862,7 @@ GameObject:
   - component: {fileID: 1042053511}
   - component: {fileID: 1042053512}
   m_Layer: 5
-  m_Name: ExitButton (1)
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3086,7 +3086,7 @@ GameObject:
   - component: {fileID: 1868379577}
   - component: {fileID: 1868379578}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: Travels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
