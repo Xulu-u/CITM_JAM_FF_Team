@@ -22,7 +22,7 @@ public class MainMenuScripts : MonoBehaviour
     public void SettingsButton()
     {
         //Change scene to settings scene and allow some modifications
-        SceneManager.LoadScene("SettingsMenu"); //Settings Scene
+        SceneManager.LoadScene("SettingsMenu2"); //Settings Scene
     }
 
     public void CreditsButtons()
