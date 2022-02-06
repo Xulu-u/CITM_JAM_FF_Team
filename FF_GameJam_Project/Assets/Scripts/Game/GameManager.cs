@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> factoryPrefabs;
     public List<GameObject> housePrefabs;
 
-    private List<Vector2Int> existingFactories = new List<Vector2Int>();
+    public List<Vector2Int> existingFactories = new List<Vector2Int>();
 
     [Header("Rounds")]
 
@@ -103,8 +103,13 @@ public class GameManager : MonoBehaviour
         {
             Vector2Int tilePos  = gameGrid.GetRandomEmptyTile();
             Vector3 worldPos    = gameGrid.GetWorldPositionFromGrid(tilePos);
-            Instantiate(housePrefabs[Random.Range(0, housePrefabs.Count - 1)], new Vector3(worldPos.x + 10, 0.0f, worldPos.z + 10), Quaternion.identity);
-            
+            House newHouse = Instantiate(housePrefabs[Random.Range(0, housePrefabs.Count - 1)], new Vector3(worldPos.x + 10, 0.0f, worldPos.z + 10), Quaternion.identity).GetComponent<House>();
+
+            newHouse.startPoint = tilePos;
+            newHouse.endPoint = existingFactories[existingFactories.Count - 1];
+            newHouse.path = new Pathfinding(gameGrid.width, gameGrid.height);
+            newHouse.grid = gameGrid;
+
             gameGrid.SetTileWalkable(tilePos.x, tilePos.y, TileType.START_COAL); 
             gameGrid.SetEntity(tilePos.x, tilePos.y, TileFunctionality.SPAWN_BASE);
         }

@@ -13,8 +13,11 @@ public class House : MonoBehaviour
     public Pathfinding      path;
     public List<PathNode>   currentPath;
 
-    private GameObject      carPrefab;
+    public GameObject      carPrefab;
     private Vector3         position;
+    public Vector2Int       startPoint;
+    public Vector2Int       endPoint;
+    public GameGrid         grid;
     private HouseType       type;
 
     public House(Vector3 position, HouseType type)
@@ -28,6 +31,25 @@ public class House : MonoBehaviour
     public bool IsPathAvailable(Vector2Int start, Vector2Int end)
     {
         currentPath = path.FindPath(start.x, start.y, end.x, end.y);
-        return (currentPath == null);
+        return (currentPath != null);
+    }
+
+    private void Start()
+    {
+     
+
+    }
+
+    private void Update()
+    {
+        //Debuging Path:
+        if(IsPathAvailable(startPoint, endPoint))
+        {
+            for(int i = 0; i < currentPath.Count - 1; ++i)
+            {
+                Vector2Int pos = currentPath[i].getNodePosition();
+                Instantiate(carPrefab, grid.GetWorldPositionFromGrid(pos), Quaternion.identity);
+            }
+        }
     }
 }

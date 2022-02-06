@@ -19,6 +19,8 @@ public class GridPathfinding
         this.gridSize = gridSize;
         this.originPosition = originPosition;
 
+        gameGrid = GameObject.Find("GameGrid").GetComponent<GameGrid>();
+
         pathGrid = new PathNode[height, width];
 
         for(int y = 0; y < width; ++y)
