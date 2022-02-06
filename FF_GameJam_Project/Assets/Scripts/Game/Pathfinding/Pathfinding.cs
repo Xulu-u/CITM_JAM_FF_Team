@@ -77,31 +77,13 @@ public class Pathfinding
 
     private List<PathNode> GetNeighbourList(PathNode currentNode)
     {
-        List<PathNode> neighbourList = new List<PathNode>();
+        List<PathNode> neighbourList    = new List<PathNode>();
+        Vector2Int currentPos           = currentNode.getNodePosition();
 
-        if(currentNode.getNodePosition().x - 1 >= 0)
-        {
-            //Left
-            neighbourList.Add(GetNode(currentNode.getNodePosition().x - 1, currentNode.getNodePosition().y));
-        }
-
-        if(currentNode.getNodePosition().x + 1 < grid.GetWidth())
-        {
-            //Right
-            neighbourList.Add(GetNode(currentNode.getNodePosition().x + 1, currentNode.getNodePosition().y));
-        }
-
-        if (currentNode.getNodePosition().y - 1 >= 0)
-        {
-            //DOWN
-            neighbourList.Add(GetNode(currentNode.getNodePosition().x, currentNode.getNodePosition().y - 1));
-        }
-
-        if (currentNode.getNodePosition().y + 1 < grid.GetHeight())
-        {
-            //Up
-            neighbourList.Add(GetNode(currentNode.getNodePosition().x, currentNode.getNodePosition().y + 1));
-        }
+        if (currentPos.x - 1 >= 0)                  { neighbourList.Add(GetNode(currentPos.x - 1, currentPos.y)); }         // LEFT
+        if (currentPos.x + 1 < grid.GetWidth())     { neighbourList.Add(GetNode(currentPos.x + 1, currentPos.y)); }         // RIGHT
+        if (currentPos.y - 1 >= 0)                  { neighbourList.Add(GetNode(currentPos.x, currentPos.y - 1)); }         // DOWN
+        if (currentPos.y + 1 < grid.GetHeight())    { neighbourList.Add(GetNode(currentPos.x, currentPos.y + 1)); }         // UP
 
         return neighbourList;
     }
@@ -128,13 +110,13 @@ public class Pathfinding
     {
         Vector2Int positionA = a.getNodePosition();
         Vector2Int positionB = b.getNodePosition();
+        
         int xDistance = Mathf.Abs(positionA.x - positionB.x);
         int yDistance = Mathf.Abs(positionA.y - positionB.y);
-
+        
         int remaining = Mathf.Abs(xDistance - yDistance);
 
         return MOVE_STRAIGHT_COST * remaining;
-
     }
 
     private PathNode GetlowestFCostNode(List<PathNode> pathNodeList)
