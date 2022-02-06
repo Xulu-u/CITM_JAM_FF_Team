@@ -32,15 +32,7 @@ public class GridPathfinding
 
     public PathNode GetGridObject(int x, int y)
     {
-        if(x >= 0 && y >= 0 && x < width && y < height)
-        {
-            return pathGrid[x, y];
-        }
-        else
-        {
-            return default;
-        }
-       
+        return (x >= 0 && y >= 0 && x < width && y < height) ? pathGrid[x, y] : default;
     }
 
     public int GetWidth()
