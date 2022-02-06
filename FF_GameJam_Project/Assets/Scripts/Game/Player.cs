@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject roadTile;
     [SerializeField] private GameObject redGrid;
 
-    public AudioManager audioManagerScript;
+    public AudioManagerEffects audioManagerScript;
 
     // Start is called before the first frame update
     void Start()

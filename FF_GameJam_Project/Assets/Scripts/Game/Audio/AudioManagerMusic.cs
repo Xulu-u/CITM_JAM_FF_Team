@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 
-public class AudioManager : MonoBehaviour
+public class AudioManagerMusic : MonoBehaviour
 {
 
 
@@ -21,17 +21,14 @@ public class AudioManager : MonoBehaviour
     
     public AudioClip gameplayMusic;
     public AudioClip menuMusic;
-    public AudioClip placeRoad;
-    public AudioClip originDestinationSound;
-    public AudioClip clickSound;
+
 
     public AudioSource audioSourceMusic;
-    public AudioSource audioSourceEffects;
+  
 
     private void Start()
     {
-
-        
+       
 
         if (SceneManager.GetActiveScene().name.ToString() == "MainScene")
         {
@@ -48,24 +45,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void PlayClickUI()
-    {
-        audioSourceEffects.clip = clickSound;
-        audioSourceEffects.Play();
-    }
-
-    public void PlayDestinationOrigin()
-    {
-        audioSourceEffects.clip = originDestinationSound;
-        audioSourceEffects.Play();
-    }
-
-    public void PlayRoadBuild()
-    {
-        audioSourceEffects.clip = placeRoad;
-        audioSourceEffects.Play();
-    }
-
+  
    
 
 
