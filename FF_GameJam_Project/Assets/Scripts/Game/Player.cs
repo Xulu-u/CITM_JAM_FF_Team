@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject roadTile;
     [SerializeField] private GameObject redGrid;
 
-    public AudioManager audioManagerScript;
+    public AudioManagerEffects audioManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
 
     void UpdateGridMaps(Vector2Int pos, gridCell cell, GameObject newTile)
     {
+
         if (newTile != null)
         {
             gameGrid.SetTileWalkable(pos.x, pos.y);                                                     //turn this tile into walkable, usefull in the future to spawn roads
