@@ -15,12 +15,13 @@ public class GridPathfinding
         this.height = height;
         this.width = width;
         this.gridSize = gridSize;
+        this.originPosition = originPosition;
 
         pathGrid = new PathNode[height, width];
 
-        for(int x = 0; x < width; ++x)
+        for(int y = 0; y < width; ++y)
         {
-            for(int y = 0; y < height; ++y)
+            for(int x = 0; x < height; ++x)
             {
                 PathNode node = new PathNode(this, x, y);
                 pathGrid[x, y] = node;

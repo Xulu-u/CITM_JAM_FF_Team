@@ -14,12 +14,14 @@ public class PathNode
 
     public PathNode cameFromNode;
 
+    public bool isWalkable;
     public PathNode(GridPathfinding grid, int x, int y)
     {
         this.grid = grid;
         this.x = x;
         this.y = y;
 
+        isWalkable = false;
     }
 
     public void CalculateFCost()
