@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100066, guid: ddd740d46a8a6eb4399573a9f3d4b2f4, type: 3}
       propertyPath: m_Name
-      value: SimplePeople_Pimp_Brown
+      value: SimplePeople_Pimp_Brown Variant
       objectReference: {fileID: 0}
     - target: {fileID: 100066, guid: ddd740d46a8a6eb4399573a9f3d4b2f4, type: 3}
       propertyPath: m_Layer
@@ -201,6 +201,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400066, guid: ddd740d46a8a6eb4399573a9f3d4b2f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: ddd740d46a8a6eb4399573a9f3d4b2f4, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
