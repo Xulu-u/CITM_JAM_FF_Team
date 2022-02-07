@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Camera")]
     public Camera ortographicCamera;
+    public Camera perspectiveCamera;
 
     [Header("Rounds")]
 
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
                 obj.GetComponentInChildren<FactoryCounter>().packetTimer = obj.GetComponentInChildren<FactoryCounter>().packetTime;
             }
             obj.GetComponentInChildren<FactoryCounter>().packetTimer -= Time.deltaTime;
-            obj.GetComponentInChildren<Text>().text = obj.GetComponentInChildren<FactoryCounter>().packetCount.ToString();
+            obj.GetComponentInChildren<Text>().text = obj.GetComponentInChildren<FactoryCounter>().packetCount.ToString() + "/8";
 
             if(obj.GetComponentInChildren<FactoryCounter>().packetCount >= 8)
             {
@@ -136,9 +137,18 @@ public class GameManager : MonoBehaviour
 
             GameObject obj = Instantiate(factoryPrefabs[Random.Range(0, factoryPrefabs.Count - 1)], worldPos, rotation);
             factoryCanvas.Add(obj);
-            obj.GetComponentInChildren<Canvas>().worldCamera = ortographicCamera;
-            
-            existingFactories.Add(tilePos);
+
+            if (ortographicCamera.gameObject.activeSelf)
+            {
+                obj.GetComponentInChildren<Canvas>().worldCamera = ortographicCamera;
+            }
+            else if (perspectiveCamera.gameObject.activeSelf)
+            {
+                obj.GetComponentInChildren<Canvas>().worldCamera = perspectiveCamera;
+            }
+
+
+                existingFactories.Add(tilePos);
 
             gameGrid.SetTileWalkable(tilePos.x, tilePos.y, TileType.END_COAL);
             gameGrid.SetEntity(tilePos.x, tilePos.y, TileFunctionality.BRIDGE);

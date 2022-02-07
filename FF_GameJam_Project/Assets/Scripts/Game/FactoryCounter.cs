@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FactoryCounter : MonoBehaviour
 {
@@ -21,10 +22,13 @@ public class FactoryCounter : MonoBehaviour
             {
                 //Quaternion rot = gameObject.GetComponent<RectTransform>().rotation;
                 gameObject.transform.LookAt(gameObject.GetComponent<Canvas>().worldCamera.transform);
-                gameObject.transform.eulerAngles = new Vector3(-270, 270, gameObject.transform.eulerAngles.z);
+                gameObject.transform.eulerAngles = new Vector3(90, -90, gameObject.transform.eulerAngles.z);
             }
             else
+            {
                 gameObject.transform.LookAt(gameObject.GetComponent<Canvas>().worldCamera.transform);
+                gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, 180 + gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.z);
+            }
         }
     }
     //private void OnTriggerEnter(Collider other)
