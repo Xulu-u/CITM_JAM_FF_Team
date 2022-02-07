@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     GameGrid gameGrid;
     public int completedTravel = 0;
+    public int maxPacketsPerFact;
 
     
     public 
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
             obj.GetComponentInChildren<FactoryCounter>().packetTimer -= Time.deltaTime;
             obj.GetComponentInChildren<Text>().text = obj.GetComponentInChildren<FactoryCounter>().packetCount.ToString() + "/8";
 
-            if(obj.GetComponentInChildren<FactoryCounter>().packetCount >= 8)
+            if(obj.GetComponentInChildren<FactoryCounter>().packetCount >= maxPacketsPerFact)
             {
                 SceneManager.LoadScene("Lose");
             }

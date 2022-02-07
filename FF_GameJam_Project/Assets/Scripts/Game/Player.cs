@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
 
     void ToggleFreeCam()
     {
-        if(editorCamera.active == true)
+        if(editorCamera.activeSelf == true)
         {
             freeCam.SetActive(true);
             editorCamera.SetActive(false);
