@@ -577,7 +577,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1454193417}
         m_TargetAssemblyTypeName: MainMenuScripts, Assembly-CSharp
-        m_MethodName: QuitButton
+        m_MethodName: ReturnToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
