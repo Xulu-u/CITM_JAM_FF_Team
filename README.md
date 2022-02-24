@@ -14,7 +14,7 @@ Terraways is a road builder strategy game where you have to supply all the peopl
 - WASD: Move around the map.
 - LMB (Left Click + Drag Mouse Button): Spawn road on the map.
 - RMB (Right Click + Drag Mouse Button): Erase road on the map.
-- ESC: Pause Game
+- ESC: Pause Game.
 
 ## Developers
 
